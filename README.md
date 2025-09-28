@@ -13,6 +13,8 @@ pnpm dev
 # or
 bun dev
 ```
+<!-- Close all running server -->
+$ pkill -f "next"
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 

@@ -6,13 +6,15 @@ interface CardProps {
     className?: string;
     hover?: boolean;
     padding?: 'sm' | 'md' | 'lg';
+    onClick?: () => void;
 }
 
 const Card = ({
     children,
     className = '',
     hover = false,
-    padding = 'md'
+    padding = 'md',
+    onClick
 }: CardProps) => {
     const baseClasses = 'bg-white rounded-2xl shadow-lg transition-all duration-300';
 
@@ -25,12 +27,15 @@ const Card = ({
     };
 
     return (
-        <div className={cn(
-            baseClasses,
-            hoverClasses,
-            paddingClasses[padding],
-            className
-        )}>
+        <div
+            className={cn(
+                baseClasses,
+                hoverClasses,
+                paddingClasses[padding],
+                className
+            )}
+            onClick={onClick}
+        >
             {children}
         </div>
     );

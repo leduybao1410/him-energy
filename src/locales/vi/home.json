@@ -1,0 +1,44 @@
+{
+  "hero": {
+    "title": "Tương lai của Năng lượng Tái tạo",
+    "subtitle": "Tiên phong trong việc phát triển các giải pháp năng lượng tái tạo bền vững và thông minh",
+    "description": "Chúng tôi cam kết mang đến những giải pháp năng lượng xanh, hiệu quả và thân thiện với môi trường cho tương lai bền vững.",
+    "cta": "Khám phá Giải pháp",
+    "secondaryCta": "Tìm hiểu thêm"
+  },
+  "stats": {
+    "title": "Thành tựu của chúng tôi",
+    "projects": "Dự án hoàn thành",
+    "clients": "Khách hàng hài lòng",
+    "energy": "MWh năng lượng tạo ra",
+    "co2": "Tấn CO2 tiết kiệm"
+  },
+  "services": {
+    "title": "Dịch vụ của chúng tôi",
+    "subtitle": "Giải pháp toàn diện cho nhu cầu năng lượng tái tạo",
+    "solar": {
+      "title": "Năng lượng Mặt trời",
+      "description": "Hệ thống điện mặt trời hiện đại, hiệu quả cao"
+    },
+    "wind": {
+      "title": "Năng lượng Gió",
+      "description": "Tua-bin gió công nghệ tiên tiến"
+    },
+    "consulting": {
+      "title": "Tư vấn Năng lượng",
+      "description": "Giải pháp tối ưu cho doanh nghiệp"
+    }
+  },
+  "about": {
+    "title": "Về Him Energy",
+    "subtitle": "Sứ mệnh của chúng tôi",
+    "description": "Với hơn 10 năm kinh nghiệm trong lĩnh vực năng lượng tái tạo, chúng tôi cam kết mang đến những giải pháp bền vững và hiệu quả nhất.",
+    "mission": "Sứ mệnh",
+    "vision": "Tầm nhìn",
+    "values": "Giá trị cốt lõi"
+  },
+  "testimonials": {
+    "title": "Khách hàng nói gì về chúng tôi",
+    "subtitle": "Những phản hồi tích cực từ đối tác"
+  }
+}

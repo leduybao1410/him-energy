@@ -1,0 +1,80 @@
+{
+  "hero": {
+    "title": "Renewable Energy Services",
+    "subtitle": "Comprehensive solutions for sustainable energy needs",
+    "description": "We provide professional renewable energy services, from consulting, design to installation and system maintenance."
+  },
+  "overview": {
+    "title": "Our Services",
+    "subtitle": "From idea to implementation",
+    "description": "With experienced experts and advanced technology, we bring the most optimal renewable energy solutions."
+  },
+  "process": {
+    "title": "Working Process",
+    "subtitle": "6 simple steps to have a renewable energy system",
+    "steps": [
+      {
+        "title": "Consultation & Survey",
+        "description": "Analyze needs and survey installation location"
+      },
+      {
+        "title": "Design & Quote",
+        "description": "Design optimal system and detailed quote"
+      },
+      {
+        "title": "Contract Signing",
+        "description": "Agreement and official contract signing"
+      },
+      {
+        "title": "Installation & Operation",
+        "description": "Construction installation and system operation"
+      },
+      {
+        "title": "Maintenance & Support",
+        "description": "Regular maintenance and 24/7 technical support"
+      },
+      {
+        "title": "Monitoring & Optimization",
+        "description": "Performance monitoring and system optimization"
+      }
+    ]
+  },
+  "solar": {
+    "title": "Solar Energy",
+    "subtitle": "Modern solar power systems",
+    "description": "We provide solar energy solutions from residential to industrial with the most advanced technology.",
+    "features": [
+      "High efficiency up to 22%",
+      "25-year warranty",
+      "Smart monitoring via app",
+      "Professional installation"
+    ],
+    "types": {
+      "residential": "Residential",
+      "commercial": "Commercial",
+      "industrial": "Industrial"
+    }
+  },
+  "wind": {
+    "title": "Wind Energy",
+    "subtitle": "Advanced technology wind turbines",
+    "description": "Efficient wind energy solutions for large-scale projects with modern turbine technology.",
+    "features": [
+      "Capacity from 2MW to 6MW",
+      "Storm-resistant design",
+      "Automatic operation",
+      "Easy maintenance"
+    ]
+  },
+  "consulting": {
+    "title": "Energy Consulting",
+    "subtitle": "Optimal solutions for businesses",
+    "description": "In-depth consulting services help businesses optimize energy use and reduce costs.",
+    "services": [
+      "Energy efficiency assessment",
+      "Optimal system design",
+      "Investment consulting",
+      "Staff training"
+    ]
+  }
+}

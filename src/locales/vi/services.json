@@ -1,0 +1,80 @@
+{
+  "hero": {
+    "title": "Dịch vụ Năng lượng Tái tạo",
+    "subtitle": "Giải pháp toàn diện cho nhu cầu năng lượng bền vững",
+    "description": "Chúng tôi cung cấp các dịch vụ năng lượng tái tạo chuyên nghiệp, từ tư vấn, thiết kế đến lắp đặt và bảo trì hệ thống."
+  },
+  "overview": {
+    "title": "Dịch vụ của chúng tôi",
+    "subtitle": "Từ ý tưởng đến thực hiện",
+    "description": "Với đội ngũ chuyên gia giàu kinh nghiệm và công nghệ tiên tiến, chúng tôi mang đến những giải pháp năng lượng tái tạo tối ưu nhất."
+  },
+  "process": {
+    "title": "Quy trình làm việc",
+    "subtitle": "6 bước đơn giản để có hệ thống năng lượng tái tạo",
+    "steps": [
+      {
+        "title": "Tư vấn & Khảo sát",
+        "description": "Phân tích nhu cầu và khảo sát địa điểm lắp đặt"
+      },
+      {
+        "title": "Thiết kế & Báo giá",
+        "description": "Thiết kế hệ thống tối ưu và báo giá chi tiết"
+      },
+      {
+        "title": "Ký kết hợp đồng",
+        "description": "Thỏa thuận và ký kết hợp đồng chính thức"
+      },
+      {
+        "title": "Lắp đặt & Vận hành",
+        "description": "Thi công lắp đặt và đưa hệ thống vào vận hành"
+      },
+      {
+        "title": "Bảo trì & Hỗ trợ",
+        "description": "Bảo trì định kỳ và hỗ trợ kỹ thuật 24/7"
+      },
+      {
+        "title": "Giám sát & Tối ưu",
+        "description": "Giám sát hiệu suất và tối ưu hóa hệ thống"
+      }
+    ]
+  },
+  "solar": {
+    "title": "Năng lượng Mặt trời",
+    "subtitle": "Hệ thống điện mặt trời hiện đại",
+    "description": "Chúng tôi cung cấp các giải pháp điện mặt trời từ dân dụng đến công nghiệp với công nghệ tiên tiến nhất.",
+    "features": [
+      "Hiệu suất cao lên đến 22%",
+      "Bảo hành 25 năm",
+      "Giám sát thông minh qua app",
+      "Lắp đặt chuyên nghiệp"
+    ],
+    "types": {
+      "residential": "Dân dụng",
+      "commercial": "Thương mại",
+      "industrial": "Công nghiệp"
+    }
+  },
+  "wind": {
+    "title": "Năng lượng Gió",
+    "subtitle": "Tua-bin gió công nghệ tiên tiến",
+    "description": "Giải pháp năng lượng gió hiệu quả cho các dự án quy mô lớn với công nghệ tua-bin hiện đại.",
+    "features": [
+      "Công suất từ 2MW đến 6MW",
+      "Thiết kế chống bão",
+      "Vận hành tự động",
+      "Bảo trì dễ dàng"
+    ]
+  },
+  "consulting": {
+    "title": "Tư vấn Năng lượng",
+    "subtitle": "Giải pháp tối ưu cho doanh nghiệp",
+    "description": "Dịch vụ tư vấn chuyên sâu giúp doanh nghiệp tối ưu hóa việc sử dụng năng lượng và giảm chi phí.",
+    "services": [
+      "Đánh giá hiệu quả năng lượng",
+      "Thiết kế hệ thống tối ưu",
+      "Tư vấn đầu tư",
+      "Đào tạo nhân viên"
+    ]
+  }
+}

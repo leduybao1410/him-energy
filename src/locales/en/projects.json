@@ -1,0 +1,45 @@
+{
+  "hero": {
+    "title": "Our Projects",
+    "subtitle": "Outstanding achievements in renewable energy",
+    "description": "Explore our featured projects, from residential to large-scale industrial projects."
+  },
+  "showcase": {
+    "title": "Featured Projects",
+    "subtitle": "Projects that made a difference",
+    "description": "Each project is a success story, demonstrating our commitment to delivering the most efficient renewable energy solutions."
+  },
+  "impact": {
+    "title": "Positive Impact",
+    "subtitle": "Contributing to environment and society",
+    "description": "Our projects not only bring economic benefits but also contribute to environmental protection and sustainable development.",
+    "metrics": {
+      "energyGenerated": "Energy Generated",
+      "co2Reduced": "CO2 Reduced",
+      "homesPowered": "Homes Powered",
+      "treesPlanted": "Equivalent Trees Planted"
+    }
+  },
+  "stories": {
+    "title": "Success Stories",
+    "subtitle": "Clients who trusted us",
+    "description": "Listen to shares from customers about their journey to renewable energy with Him Energy."
+  },
+  "categories": {
+    "all": "All",
+    "residential": "Residential",
+    "commercial": "Commercial",
+    "industrial": "Industrial",
+    "utility": "Utility"
+  },
+  "projectDetails": {
+    "location": "Location",
+    "capacity": "Capacity",
+    "completion": "Completion",
+    "client": "Client",
+    "technology": "Technology",
+    "impact": "Impact",
+    "gallery": "Gallery",
+    "description": "Project Description"
+  }
+}

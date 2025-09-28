@@ -1,0 +1,44 @@
+{
+  "hero": {
+    "title": "Future of Renewable Energy",
+    "subtitle": "Pioneering sustainable and smart renewable energy solutions development",
+    "description": "We are committed to delivering green, efficient, and environmentally friendly energy solutions for a sustainable future.",
+    "cta": "Explore Solutions",
+    "secondaryCta": "Learn More"
+  },
+  "stats": {
+    "title": "Our Achievements",
+    "projects": "Completed Projects",
+    "clients": "Satisfied Clients",
+    "energy": "MWh Energy Generated",
+    "co2": "Tons CO2 Saved"
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Comprehensive solutions for renewable energy needs",
+    "solar": {
+      "title": "Solar Energy",
+      "description": "Modern, high-efficiency solar power systems"
+    },
+    "wind": {
+      "title": "Wind Energy",
+      "description": "Advanced technology wind turbines"
+    },
+    "consulting": {
+      "title": "Energy Consulting",
+      "description": "Optimal solutions for businesses"
+    }
+  },
+  "about": {
+    "title": "About Him Energy",
+    "subtitle": "Our Mission",
+    "description": "With over 10 years of experience in renewable energy, we are committed to delivering the most sustainable and efficient solutions.",
+    "mission": "Mission",
+    "vision": "Vision",
+    "values": "Core Values"
+  },
+  "testimonials": {
+    "title": "What Our Clients Say",
+    "subtitle": "Positive feedback from our partners"
+  }
+}

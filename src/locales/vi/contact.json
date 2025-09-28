@@ -1,0 +1,80 @@
+{
+  "hero": {
+    "title": "Liên hệ với chúng tôi",
+    "subtitle": "Sẵn sàng hỗ trợ bạn",
+    "description": "Đội ngũ chuyên gia của chúng tôi luôn sẵn sàng tư vấn và hỗ trợ bạn trong việc lựa chọn giải pháp năng lượng tái tạo phù hợp nhất."
+  },
+  "info": {
+    "title": "Thông tin liên hệ",
+    "subtitle": "Kết nối với Him Energy",
+    "description": "Chúng tôi có mặt tại nhiều tỉnh thành trên cả nước để phục vụ khách hàng một cách tốt nhất.",
+    "address": "Địa chỉ",
+    "phone": "Điện thoại",
+    "email": "Email",
+    "hours": "Giờ làm việc"
+  },
+  "form": {
+    "title": "Gửi tin nhắn",
+    "subtitle": "Chúng tôi sẽ phản hồi trong 24 giờ",
+    "fields": {
+      "name": "Họ và tên",
+      "email": "Email",
+      "phone": "Số điện thoại",
+      "company": "Công ty",
+      "subject": "Chủ đề",
+      "message": "Tin nhắn",
+      "service": "Dịch vụ quan tâm"
+    },
+    "placeholders": {
+      "name": "Nhập họ và tên của bạn",
+      "email": "Nhập địa chỉ email",
+      "phone": "Nhập số điện thoại",
+      "company": "Nhập tên công ty (nếu có)",
+      "subject": "Chọn chủ đề",
+      "message": "Nhập tin nhắn của bạn",
+      "service": "Chọn dịch vụ quan tâm"
+    },
+    "subjects": {
+      "general": "Tư vấn chung",
+      "solar": "Năng lượng mặt trời",
+      "wind": "Năng lượng gió",
+      "consulting": "Tư vấn năng lượng",
+      "maintenance": "Bảo trì hệ thống",
+      "other": "Khác"
+    },
+    "services": {
+      "solar": "Năng lượng mặt trời",
+      "wind": "Năng lượng gió",
+      "consulting": "Tư vấn năng lượng",
+      "maintenance": "Bảo trì",
+      "all": "Tất cả dịch vụ"
+    },
+    "submit": "Gửi tin nhắn",
+    "sending": "Đang gửi...",
+    "success": "Tin nhắn đã được gửi thành công!",
+    "error": "Có lỗi xảy ra, vui lòng thử lại."
+  },
+  "map": {
+    "title": "Vị trí của chúng tôi",
+    "subtitle": "Tìm đường đến Him Energy",
+    "description": "Văn phòng chính của chúng tôi tọa lạc tại trung tâm thành phố, dễ dàng tiếp cận bằng nhiều phương tiện giao thông."
+  },
+  "faq": {
+    "title": "Câu hỏi thường gặp",
+    "subtitle": "Giải đáp những thắc mắc phổ biến",
+    "questions": [
+      {
+        "question": "Thời gian lắp đặt hệ thống điện mặt trời mất bao lâu?",
+        "answer": "Thời gian lắp đặt thường từ 1-3 ngày tùy thuộc vào quy mô dự án. Chúng tôi sẽ cung cấp timeline chi tiết sau khi khảo sát."
+      },
+      {
+        "question": "Hệ thống có bảo hành bao lâu?",
+        "answer": "Chúng tôi cung cấp bảo hành 25 năm cho tấm pin mặt trời và 10 năm cho inverter, cùng với bảo trì định kỳ."
+      },
+      {
+        "question": "Chi phí đầu tư ban đầu là bao nhiêu?",
+        "answer": "Chi phí phụ thuộc vào quy mô và loại hệ thống. Chúng tôi cung cấp nhiều gói tài chính linh hoạt để phù hợp với ngân sách của bạn."
+      }
+    ]
+  }
+}

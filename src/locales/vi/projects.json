@@ -1,0 +1,45 @@
+{
+  "hero": {
+    "title": "Dự án của chúng tôi",
+    "subtitle": "Những thành tựu nổi bật trong lĩnh vực năng lượng tái tạo",
+    "description": "Khám phá các dự án tiêu biểu mà chúng tôi đã thực hiện, từ dự án dân dụng đến các dự án công nghiệp quy mô lớn."
+  },
+  "showcase": {
+    "title": "Dự án tiêu biểu",
+    "subtitle": "Những dự án đã tạo nên sự khác biệt",
+    "description": "Mỗi dự án là một câu chuyện thành công, thể hiện cam kết của chúng tôi trong việc mang đến những giải pháp năng lượng tái tạo hiệu quả nhất."
+  },
+  "impact": {
+    "title": "Tác động tích cực",
+    "subtitle": "Đóng góp cho môi trường và xã hội",
+    "description": "Các dự án của chúng tôi không chỉ mang lại lợi ích kinh tế mà còn góp phần bảo vệ môi trường và phát triển bền vững.",
+    "metrics": {
+      "energyGenerated": "Năng lượng tạo ra",
+      "co2Reduced": "CO2 giảm thải",
+      "homesPowered": "Hộ gia đình được cung cấp điện",
+      "treesPlanted": "Cây xanh tương đương"
+    }
+  },
+  "stories": {
+    "title": "Câu chuyện thành công",
+    "subtitle": "Những khách hàng đã tin tưởng chúng tôi",
+    "description": "Lắng nghe những chia sẻ từ khách hàng về hành trình chuyển đổi sang năng lượng tái tạo cùng Him Energy."
+  },
+  "categories": {
+    "all": "Tất cả",
+    "residential": "Dân dụng",
+    "commercial": "Thương mại",
+    "industrial": "Công nghiệp",
+    "utility": "Tiện ích"
+  },
+  "projectDetails": {
+    "location": "Địa điểm",
+    "capacity": "Công suất",
+    "completion": "Hoàn thành",
+    "client": "Khách hàng",
+    "technology": "Công nghệ",
+    "impact": "Tác động",
+    "gallery": "Thư viện ảnh",
+    "description": "Mô tả dự án"
+  }
+}

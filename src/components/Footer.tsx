@@ -56,13 +56,13 @@ const Footer = () => {
     ];
 
     return (
-        <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-emerald-900 text-white relative overflow-hidden">
+        <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-secondary-700 text-white relative overflow-hidden">
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-5">
                 {/* bg-emerald-400 */}
                 <div className="absolute top-10 left-10 w-32 h-32  rounded-full animate-pulse"></div>-
-                <div className="absolute top-40 right-20 w-24 h-24 bg-cyan-400 rounded-full animate-pulse delay-1000"></div>
-                <div className="absolute bottom-40 left-1/4 w-40 h-40 bg-teal-400 rounded-full animate-pulse delay-2000"></div>
+                <div className="absolute top-40 right-20 w-24 h-24 bg-primary-400 rounded-full animate-pulse delay-1000"></div>
+                <div className="absolute bottom-40 left-1/4 w-40 h-40 bg-primary-500 rounded-full animate-pulse delay-2000"></div>
             </div>
 
             <div className="relative z-10">

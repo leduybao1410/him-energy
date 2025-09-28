@@ -1,0 +1,30 @@
+{
+  "navigation": {
+    "home": "首页",
+    "services": "服务",
+    "solutions": "解决方案",
+    "about": "关于我们",
+    "projects": "项目",
+    "contact": "联系我们",
+    "getQuote": "获取免费报价",
+    "greenEnergy": "绿色能源"
+  },
+  "solutions": {
+    "solar": "太阳能",
+    "wind": "风能",
+    "consulting": "能源咨询",
+    "optimalSolution": "最优解决方案"
+  },
+  "buttons": {
+    "learnMore": "了解更多",
+    "getStarted": "开始",
+    "contactUs": "联系我们",
+    "readMore": "阅读更多",
+    "viewAll": "查看全部"
+  },
+  "meta": {
+    "title": "Him Energy - 可再生能源的未来",
+    "description": "在可持续和智能可再生能源解决方案开发方面的先驱。",
+    "keywords": "可再生能源, 太阳能, 风能, Him Energy, 可持续, 绿色"
+  }
+}

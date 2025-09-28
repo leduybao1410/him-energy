@@ -1,0 +1,30 @@
+{
+    "navigation": {
+        "home": "Trang chủ",
+        "services": "Dịch vụ",
+        "solutions": "Giải pháp",
+        "about": "Về chúng tôi",
+        "projects": "Dự án",
+        "contact": "Liên hệ",
+        "getQuote": "Báo giá miễn phí",
+        "greenEnergy": "Năng lượng xanh"
+    },
+    "solutions": {
+        "solar": "Năng lượng Mặt trời",
+        "wind": "Năng lượng Gió",
+        "consulting": "Tư vấn Năng lượng",
+        "optimalSolution": "Giải pháp tối ưu"
+    },
+    "buttons": {
+        "learnMore": "Tìm hiểu thêm",
+        "getStarted": "Bắt đầu",
+        "contactUs": "Liên hệ chúng tôi",
+        "readMore": "Đọc thêm",
+        "viewAll": "Xem tất cả"
+    },
+    "meta": {
+        "title": "Him Energy - Tương lai của Năng lượng Tái tạo",
+        "description": "Tiên phong trong việc phát triển các giải pháp năng lượng tái tạo bền vững và thông minh.",
+        "keywords": "năng lượng tái tạo, năng lượng mặt trời, năng lượng gió, Him Energy, bền vững, xanh"
+    }
+}

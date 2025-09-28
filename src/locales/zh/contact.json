@@ -1,0 +1,80 @@
+{
+  "hero": {
+    "title": "联系我们",
+    "subtitle": "准备为您提供支持",
+    "description": "我们的专家团队随时准备为您选择最合适的可再生能源解决方案提供咨询和支持。"
+  },
+  "info": {
+    "title": "联系信息",
+    "subtitle": "与Him Energy联系",
+    "description": "我们在全国多个省市都有业务，以最佳方式为客户服务。",
+    "address": "地址",
+    "phone": "电话",
+    "email": "邮箱",
+    "hours": "工作时间"
+  },
+  "form": {
+    "title": "发送消息",
+    "subtitle": "我们将在24小时内回复",
+    "fields": {
+      "name": "姓名",
+      "email": "邮箱",
+      "phone": "电话号码",
+      "company": "公司",
+      "subject": "主题",
+      "message": "消息",
+      "service": "感兴趣的服务"
+    },
+    "placeholders": {
+      "name": "输入您的姓名",
+      "email": "输入邮箱地址",
+      "phone": "输入电话号码",
+      "company": "输入公司名称（如有）",
+      "subject": "选择主题",
+      "message": "输入您的消息",
+      "service": "选择感兴趣的服务"
+    },
+    "subjects": {
+      "general": "一般咨询",
+      "solar": "太阳能",
+      "wind": "风能",
+      "consulting": "能源咨询",
+      "maintenance": "系统维护",
+      "other": "其他"
+    },
+    "services": {
+      "solar": "太阳能",
+      "wind": "风能",
+      "consulting": "能源咨询",
+      "maintenance": "维护",
+      "all": "所有服务"
+    },
+    "submit": "发送消息",
+    "sending": "发送中...",
+    "success": "消息发送成功！",
+    "error": "发生错误，请重试。"
+  },
+  "map": {
+    "title": "我们的位置",
+    "subtitle": "找到前往Him Energy的路",
+    "description": "我们的主要办公室位于市中心，可通过各种交通工具轻松到达。"
+  },
+  "faq": {
+    "title": "常见问题",
+    "subtitle": "常见问题的答案",
+    "questions": [
+      {
+        "question": "安装太阳能发电系统需要多长时间？",
+        "answer": "安装时间通常为1-3天，具体取决于项目规模。我们将在调查后提供详细的时间表。"
+      },
+      {
+        "question": "系统保修多长时间？",
+        "answer": "我们为太阳能电池板提供25年保修，为逆变器提供10年保修，并提供定期维护。"
+      },
+      {
+        "question": "初始投资成本是多少？",
+        "answer": "成本取决于系统规模和类型。我们提供灵活的财务方案以适应您的预算。"
+      }
+    ]
+  }
+}

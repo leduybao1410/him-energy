@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "title": "About Him Energy",
+    "subtitle": "Pioneering renewable energy",
+    "description": "With over 10 years of experience, we are a trusted partner in developing sustainable energy solutions."
+  },
+  "mission": {
+    "title": "Our Mission",
+    "description": "We are committed to delivering modern, efficient, and environmentally friendly renewable energy solutions, contributing to building a sustainable future for future generations.",
+    "goals": [
+      "Develop advanced renewable energy technology",
+      "Minimize environmental impact",
+      "Bring economic value to customers",
+      "Contribute to sustainable social development"
+    ]
+  },
+  "vision": {
+    "title": "Vision",
+    "description": "To become the leading company in renewable energy in Vietnam and Southeast Asia, with the goal of achieving 100% clean energy by 2030."
+  },
+  "values": {
+    "title": "Core Values",
+    "innovation": {
+      "title": "Innovation",
+      "description": "Always seeking and applying the most advanced technologies"
+    },
+    "sustainability": {
+      "title": "Sustainability",
+      "description": "Commitment to environment and sustainable development"
+    },
+    "quality": {
+      "title": "Quality",
+      "description": "Ensuring the highest quality in all products and services"
+    },
+    "integrity": {
+      "title": "Integrity",
+      "description": "Operating transparently, honestly and responsibly"
+    }
+  },
+  "history": {
+    "title": "Development History",
+    "timeline": [
+      {
+        "year": "2014",
+        "title": "Company Founded",
+        "description": "Him Energy was established with the mission to develop renewable energy"
+      },
+      {
+        "year": "2016",
+        "title": "First Project",
+        "description": "Completed first solar power project with 1MW capacity"
+      },
+      {
+        "year": "2018",
+        "title": "Service Expansion",
+        "description": "Started providing energy consulting services for businesses"
+      },
+      {
+        "year": "2020",
+        "title": "New Technology",
+        "description": "Applied AI technology in energy system management"
+      },
+      {
+        "year": "2022",
+        "title": "Major Achievement",
+        "description": "Reached 100MW installed capacity and 500+ completed projects"
+      }
+    ]
+  },
+  "team": {
+    "title": "Our Team",
+    "subtitle": "Leading experts in renewable energy field",
+    "description": "Our team includes engineers, specialists and scientists with extensive experience in renewable energy."
+  }
+}

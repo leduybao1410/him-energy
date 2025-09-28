@@ -1,0 +1,30 @@
+{
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "solutions": "Solutions",
+    "about": "About Us",
+    "projects": "Projects",
+    "contact": "Contact",
+    "getQuote": "Get Free Quote",
+    "greenEnergy": "Green Energy"
+  },
+  "solutions": {
+    "solar": "Solar Energy",
+    "wind": "Wind Energy",
+    "consulting": "Energy Consulting",
+    "optimalSolution": "Optimal Solution"
+  },
+  "buttons": {
+    "learnMore": "Learn More",
+    "getStarted": "Get Started",
+    "contactUs": "Contact Us",
+    "readMore": "Read More",
+    "viewAll": "View All"
+  },
+  "meta": {
+    "title": "Him Energy - Future of Renewable Energy",
+    "description": "Pioneering sustainable and smart renewable energy solutions development.",
+    "keywords": "renewable energy, solar energy, wind energy, Him Energy, sustainable, green"
+  }
+}

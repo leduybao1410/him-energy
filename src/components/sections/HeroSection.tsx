@@ -1,7 +1,13 @@
+'use client';
+
 import { ArrowRight, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui';
+import { useTranslations } from 'next-intl';
 
 const HeroSection = () => {
+    const t = useTranslations('home');
+    const tCommon = useTranslations('common');
+
     const handleGetStarted = () => {
         // Logic để xử lý khi click "Bắt đầu ngay"
         console.log('Get started clicked');
@@ -30,14 +36,11 @@ const HeroSection = () => {
                 <div className="max-w-4xl mx-auto py-4">
                     <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
                         <span className="bg-gradient-to-r from-primary-400 to-secondary-400 bg-clip-text text-transparent">
-                            Powering a
+                            {t('hero.title')}
                         </span>
-                        <br />
-                        <span className="text-white">Sustainable Future</span>
                     </h1>
                     <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-3xl mx-auto leading-relaxed">
-                        Chúng tôi tiên phong trong việc phát triển các giải pháp năng lượng tái tạo
-                        thông minh, giúp doanh nghiệp và cộng đồng chuyển đổi sang tương lai xanh bền vững.
+                        {t('hero.description')}
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                         <Button
@@ -45,7 +48,7 @@ const HeroSection = () => {
                             size="md"
                             onClick={handleGetStarted}
                         >
-                            Bắt đầu ngay
+                            {t('hero.cta')}
                             <ArrowRight className="w-5 h-5" />
                         </Button>
                         <Button
@@ -53,7 +56,7 @@ const HeroSection = () => {
                             size="md"
                             onClick={handleLearnMore}
                         >
-                            Tìm hiểu thêm
+                            {t('hero.secondaryCta')}
                             <ChevronRight className="w-5 h-5" />
                         </Button>
                     </div>

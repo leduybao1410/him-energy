@@ -1,11 +1,15 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { Menu, X, Sun, Wind, Leaf, ChevronDown } from 'lucide-react';
+import { useTranslations } from 'next-intl';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
+    const t = useTranslations('common');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -20,17 +24,18 @@ const Header = () => {
     };
 
     const navigationItems = [
-        { name: 'Trang chủ', href: '#home' },
-        { name: 'Giải pháp', href: '#solutions', hasDropdown: true },
-        { name: 'Về chúng tôi', href: '#about' },
-        { name: 'Dự án', href: '#projects' },
-        { name: 'Liên hệ', href: '#contact' },
+        { name: t('navigation.home'), href: '/', isExternal: false },
+        { name: t('navigation.services'), href: '/services', isExternal: false },
+        { name: t('navigation.solutions'), href: '#solutions', hasDropdown: true },
+        { name: t('navigation.about'), href: '/about', isExternal: false },
+        { name: t('navigation.projects'), href: '/projects', isExternal: false },
+        { name: t('navigation.contact'), href: '/contact' },
     ];
 
     const solutionsDropdown = [
-        { name: 'Năng lượng Mặt trời', icon: Sun, href: '#solar' },
-        { name: 'Năng lượng Gió', icon: Wind, href: '#wind' },
-        { name: 'Tư vấn Năng lượng', icon: Leaf, href: '#consulting' },
+        { name: t('solutions.solar'), icon: Sun, href: '/services/solar' },
+        { name: t('solutions.wind'), icon: Wind, href: '/services/wind' },
+        { name: t('solutions.consulting'), icon: Leaf, href: '/services/consulting' },
     ];
 
     return (
@@ -43,7 +48,7 @@ const Header = () => {
             <div className="container mx-auto px-4">
                 <div className="flex justify-between items-center h-20">
                     {/* Logo */}
-                    <div className="flex items-center space-x-3">
+                    <Link href="/" className="flex items-center space-x-3">
                         <div className="relative">
                             <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center shadow-lg">
                                 <Sun className="w-6 h-6 text-white" />
@@ -52,33 +57,48 @@ const Header = () => {
                         </div>
                         <div>
                             <h1 className={`text-2xl font-bold ${isScrolled ? 'text-gray-900' : 'text-white'}`}>Him Energy</h1>
-                            <p className="text-xs text-primary-600 font-medium">Năng lượng xanh</p>
+                            <p className="text-xs text-primary-600 font-medium">{t('navigation.greenEnergy')}</p>
                         </div>
-                    </div>
+                    </Link>
 
                     {/* Desktop Navigation */}
                     <nav className="hidden lg:flex items-center gap-6">
                         {navigationItems.map((item) => (
                             <div key={item.name} className="relative group">
-                                <a
-                                    href={item.href}
-                                    className={`flex items-center space-x-1 px-4 py-2 rounded-lg transition-all duration-300 ${isScrolled
-                                        ? 'text-gray-700 hover:text-primary-600 hover:bg-primary-50'
-                                        : 'text-white hover:text-primary-300 hover:bg-white/10'
-                                        }`}
-                                >
-                                    <span>{item.name}</span>
-                                    {item.hasDropdown && (
-                                        <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" />
-                                    )}
-                                </a>
+                                {item.isExternal === false ? (
+                                    <Link
+                                        href={item.href}
+                                        className={`flex items-center space-x-1 px-4 py-2 rounded-lg transition-all duration-300 ${isScrolled
+                                            ? 'text-gray-700 hover:text-primary-600 hover:bg-primary-50'
+                                            : 'text-white hover:text-primary-300 hover:bg-white/10'
+                                            }`}
+                                    >
+                                        <span>{item.name}</span>
+                                        {item.hasDropdown && (
+                                            <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" />
+                                        )}
+                                    </Link>
+                                ) : (
+                                    <a
+                                        href={item.href}
+                                        className={`flex items-center space-x-1 px-4 py-2 rounded-lg transition-all duration-300 ${isScrolled
+                                            ? 'text-gray-700 hover:text-primary-600 hover:bg-primary-50'
+                                            : 'text-white hover:text-primary-300 hover:bg-white/10'
+                                            }`}
+                                    >
+                                        <span>{item.name}</span>
+                                        {item.hasDropdown && (
+                                            <ChevronDown className="w-4 h-4 transition-transform duration-300 group-hover:rotate-180" />
+                                        )}
+                                    </a>
+                                )}
 
                                 {/* Dropdown for Solutions */}
                                 {item.hasDropdown && (
                                     <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-xl border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                                         <div className="p-2">
                                             {solutionsDropdown.map((solution) => (
-                                                <a
+                                                <Link
                                                     key={solution.name}
                                                     href={solution.href}
                                                     className="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-primary-50 transition-colors duration-200 group/item"
@@ -88,9 +108,9 @@ const Header = () => {
                                                     </div>
                                                     <div>
                                                         <div className="font-medium text-gray-900">{solution.name}</div>
-                                                        <div className="text-sm text-gray-500">Giải pháp tối ưu</div>
+                                                        <div className="text-sm text-gray-500">{t('solutions.optimalSolution')}</div>
                                                     </div>
-                                                </a>
+                                                </Link>
                                             ))}
                                         </div>
                                     </div>
@@ -99,13 +119,14 @@ const Header = () => {
                         ))}
                     </nav>
 
-                    {/* CTA Button */}
+                    {/* CTA Button & Language Switcher */}
                     <div className="hidden lg:flex items-center space-x-4">
+                        <LanguageSwitcher />
                         <button className={`px-6 py-2.5 rounded-full font-semibold transition-all duration-300 ${isScrolled
                             ? 'bg-primary-600 hover:bg-primary-700 text-white shadow-lg shadow-primary-500/25'
                             : 'bg-white/20 hover:bg-white/30 text-white border border-white/30 backdrop-blur-sm'
                             }`}>
-                            Báo giá miễn phí
+                            {t('navigation.getQuote')}
                         </button>
                     </div>
 
@@ -128,17 +149,27 @@ const Header = () => {
                             <nav className="space-y-4">
                                 {navigationItems.map((item) => (
                                     <div key={item.name}>
-                                        <a
-                                            href={item.href}
-                                            className="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors duration-200"
-                                            onClick={() => setIsMenuOpen(false)}
-                                        >
-                                            {item.name}
-                                        </a>
+                                        {item.isExternal === false ? (
+                                            <Link
+                                                href={item.href}
+                                                className="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors duration-200"
+                                                onClick={() => setIsMenuOpen(false)}
+                                            >
+                                                {item.name}
+                                            </Link>
+                                        ) : (
+                                            <a
+                                                href={item.href}
+                                                className="block px-4 py-3 text-gray-700 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors duration-200"
+                                                onClick={() => setIsMenuOpen(false)}
+                                            >
+                                                {item.name}
+                                            </a>
+                                        )}
                                         {item.hasDropdown && (
                                             <div className="ml-4 mt-2 space-y-2">
                                                 {solutionsDropdown.map((solution) => (
-                                                    <a
+                                                    <Link
                                                         key={solution.name}
                                                         href={solution.href}
                                                         className="flex items-center space-x-3 px-4 py-2 text-sm text-gray-600 hover:text-primary-600 hover:bg-primary-50 rounded-lg transition-colors duration-200"
@@ -146,18 +177,21 @@ const Header = () => {
                                                     >
                                                         <solution.icon className="w-4 h-4" />
                                                         <span>{solution.name}</span>
-                                                    </a>
+                                                    </Link>
                                                 ))}
                                             </div>
                                         )}
                                     </div>
                                 ))}
-                                <div className="pt-4 border-t border-gray-200">
+                                <div className="pt-4 border-t border-gray-200 space-y-4">
+                                    <div className="px-4">
+                                        <LanguageSwitcher />
+                                    </div>
                                     <button
                                         className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300"
                                         onClick={() => setIsMenuOpen(false)}
                                     >
-                                        Báo giá miễn phí
+                                        {t('navigation.getQuote')}
                                     </button>
                                 </div>
                             </nav>

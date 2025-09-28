@@ -1,0 +1,44 @@
+{
+  "hero": {
+    "title": "可再生能源的未来",
+    "subtitle": "在可持续和智能可再生能源解决方案开发方面的先驱",
+    "description": "我们致力于为可持续的未来提供绿色、高效和环保的能源解决方案。",
+    "cta": "探索解决方案",
+    "secondaryCta": "了解更多"
+  },
+  "stats": {
+    "title": "我们的成就",
+    "projects": "已完成项目",
+    "clients": "满意客户",
+    "energy": "发电量（兆瓦时）",
+    "co2": "节省二氧化碳（吨）"
+  },
+  "services": {
+    "title": "我们的服务",
+    "subtitle": "可再生能源需求的综合解决方案",
+    "solar": {
+      "title": "太阳能",
+      "description": "现代高效太阳能发电系统"
+    },
+    "wind": {
+      "title": "风能",
+      "description": "先进技术风力涡轮机"
+    },
+    "consulting": {
+      "title": "能源咨询",
+      "description": "企业最优解决方案"
+    }
+  },
+  "about": {
+    "title": "关于Him Energy",
+    "subtitle": "我们的使命",
+    "description": "在可再生能源领域拥有超过10年的经验，我们致力于提供最可持续和高效的解决方案。",
+    "mission": "使命",
+    "vision": "愿景",
+    "values": "核心价值观"
+  },
+  "testimonials": {
+    "title": "客户评价",
+    "subtitle": "来自合作伙伴的积极反馈"
+  }
+}

@@ -1,3 +1,5 @@
+'use client';
+
 import { Phone, Mail, MapPin } from 'lucide-react';
 import { Section, Container, Input, Textarea, Select, Button } from '@/components/ui';
 

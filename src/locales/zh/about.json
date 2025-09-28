@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "title": "关于Him Energy",
+    "subtitle": "可再生能源的先驱",
+    "description": "拥有超过10年的经验，我们是开发可持续能源解决方案的值得信赖的合作伙伴。"
+  },
+  "mission": {
+    "title": "我们的使命",
+    "description": "我们致力于提供现代、高效和环保的可再生能源解决方案，为子孙后代建设可持续的未来做出贡献。",
+    "goals": [
+      "开发先进的可再生能源技术",
+      "最小化环境影响",
+      "为客户带来经济价值",
+      "促进可持续社会发展"
+    ]
+  },
+  "vision": {
+    "title": "愿景",
+    "description": "成为越南和东南亚可再生能源领域的领先公司，目标是在2030年实现100%清洁能源。"
+  },
+  "values": {
+    "title": "核心价值观",
+    "innovation": {
+      "title": "创新",
+      "description": "始终寻求和应用最先进的技术"
+    },
+    "sustainability": {
+      "title": "可持续性",
+      "description": "对环境承诺和可持续发展"
+    },
+    "quality": {
+      "title": "质量",
+      "description": "确保所有产品和服务的高质量"
+    },
+    "integrity": {
+      "title": "诚信",
+      "description": "透明、诚实和负责任的运营"
+    }
+  },
+  "history": {
+    "title": "发展历史",
+    "timeline": [
+      {
+        "year": "2014",
+        "title": "公司成立",
+        "description": "Him Energy成立，使命是开发可再生能源"
+      },
+      {
+        "year": "2016",
+        "title": "第一个项目",
+        "description": "完成第一个1兆瓦太阳能发电项目"
+      },
+      {
+        "year": "2018",
+        "title": "服务扩展",
+        "description": "开始为企业提供能源咨询服务"
+      },
+      {
+        "year": "2020",
+        "title": "新技术",
+        "description": "在能源系统管理中应用人工智能技术"
+      },
+      {
+        "year": "2022",
+        "title": "重大成就",
+        "description": "达到100兆瓦装机容量和500多个完成项目"
+      }
+    ]
+  },
+  "team": {
+    "title": "我们的团队",
+    "subtitle": "可再生能源领域的领先专家",
+    "description": "我们的团队包括在可再生能源领域拥有丰富经验的工程师、专家和科学家。"
+  }
+}

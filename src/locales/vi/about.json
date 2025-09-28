@@ -1,0 +1,75 @@
+{
+  "hero": {
+    "title": "Về Him Energy",
+    "subtitle": "Tiên phong trong năng lượng tái tạo",
+    "description": "Với hơn 10 năm kinh nghiệm, chúng tôi là đối tác tin cậy trong việc phát triển các giải pháp năng lượng bền vững."
+  },
+  "mission": {
+    "title": "Sứ mệnh của chúng tôi",
+    "description": "Chúng tôi cam kết mang đến những giải pháp năng lượng tái tạo hiện đại, hiệu quả và thân thiện với môi trường, góp phần xây dựng một tương lai bền vững cho thế hệ mai sau.",
+    "goals": [
+      "Phát triển công nghệ năng lượng tái tạo tiên tiến",
+      "Giảm thiểu tác động đến môi trường",
+      "Mang lại giá trị kinh tế cho khách hàng",
+      "Đóng góp vào sự phát triển bền vững của xã hội"
+    ]
+  },
+  "vision": {
+    "title": "Tầm nhìn",
+    "description": "Trở thành công ty hàng đầu trong lĩnh vực năng lượng tái tạo tại Việt Nam và khu vực Đông Nam Á, với mục tiêu đạt 100% năng lượng sạch vào năm 2030."
+  },
+  "values": {
+    "title": "Giá trị cốt lõi",
+    "innovation": {
+      "title": "Đổi mới",
+      "description": "Luôn tìm kiếm và áp dụng những công nghệ tiên tiến nhất"
+    },
+    "sustainability": {
+      "title": "Bền vững",
+      "description": "Cam kết với môi trường và phát triển bền vững"
+    },
+    "quality": {
+      "title": "Chất lượng",
+      "description": "Đảm bảo chất lượng cao nhất trong mọi sản phẩm và dịch vụ"
+    },
+    "integrity": {
+      "title": "Chính trực",
+      "description": "Hoạt động minh bạch, trung thực và có trách nhiệm"
+    }
+  },
+  "history": {
+    "title": "Lịch sử phát triển",
+    "timeline": [
+      {
+        "year": "2014",
+        "title": "Thành lập công ty",
+        "description": "Him Energy được thành lập với sứ mệnh phát triển năng lượng tái tạo"
+      },
+      {
+        "year": "2016",
+        "title": "Dự án đầu tiên",
+        "description": "Hoàn thành dự án điện mặt trời đầu tiên với công suất 1MW"
+      },
+      {
+        "year": "2018",
+        "title": "Mở rộng dịch vụ",
+        "description": "Bắt đầu cung cấp dịch vụ tư vấn năng lượng cho doanh nghiệp"
+      },
+      {
+        "year": "2020",
+        "title": "Công nghệ mới",
+        "description": "Áp dụng công nghệ AI trong quản lý hệ thống năng lượng"
+      },
+      {
+        "year": "2022",
+        "title": "Thành tựu lớn",
+        "description": "Đạt mốc 100MW công suất lắp đặt và 500+ dự án hoàn thành"
+      }
+    ]
+  },
+  "team": {
+    "title": "Đội ngũ của chúng tôi",
+    "subtitle": "Những chuyên gia hàng đầu trong lĩnh vực năng lượng tái tạo",
+    "description": "Đội ngũ của chúng tôi bao gồm các kỹ sư, chuyên gia và nhà khoa học có kinh nghiệm sâu rộng trong lĩnh vực năng lượng tái tạo."
+  }
+}
