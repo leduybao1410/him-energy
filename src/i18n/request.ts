@@ -1,11 +1,6 @@
 import { notFound } from 'next/navigation';
 import { getRequestConfig } from 'next-intl/server';
-import common from '../locales/vi/common.json';
-import home from '../locales/vi/home.json';
-import about from '../locales/vi/about.json';
-import services from '../locales/vi/services.json';
-import projects from '../locales/vi/projects.json';
-import contact from '../locales/vi/contact.json';
+
 
 // Can be imported from a shared config
 const LOCALES = ['vi', 'en', 'ru', 'zh'];
@@ -19,6 +14,7 @@ export default getRequestConfig(async ({ locale }) => {
   const services = await import(`../locales/vi/services.json`);
   const projects = await import(`../locales/vi/projects.json`);
   const contact = await import(`../locales/vi/contact.json`);
+  const products = await import(`../locales/vi/products.json`);
   if (locale == undefined) return {
     locale: 'vi',
     messages: {
@@ -28,6 +24,7 @@ export default getRequestConfig(async ({ locale }) => {
       services: services,
       projects: projects,
       contact: contact,
+      products: products,
     }
   };
   // if (!LOCALES.includes(locale as 'vi' | 'en' | 'ru' | 'zh')) {
@@ -37,13 +34,14 @@ export default getRequestConfig(async ({ locale }) => {
 
   // Nạp các file dịch cho locale với error handling
   try {
-    const [common, home, about, services, projects, contact] = await Promise.all([
+    const [common, home, about, services, projects, contact, products] = await Promise.all([
       import(`../locales/${locale}/common.json`),
       import(`../locales/${locale}/home.json`),
       import(`../locales/${locale}/about.json`),
       import(`../locales/${locale}/services.json`),
       import(`../locales/${locale}/projects.json`),
       import(`../locales/${locale}/contact.json`),
+      import(`../locales/${locale}/products.json`),
     ]);
 
     return {
@@ -55,6 +53,7 @@ export default getRequestConfig(async ({ locale }) => {
         services: services.default,
         projects: projects.default,
         contact: contact.default,
+        products: products.default,
       }
     };
   } catch (error) {

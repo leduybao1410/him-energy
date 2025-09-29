@@ -34,14 +34,18 @@ const LanguageSwitcher = () => {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-white/10 hover:bg-white/20 text-white transition-colors duration-200"
-        aria-label="Change language"
+        className="flex items-center space-x-2 px-3 py-2 rounded-lg bg-white/80 hover:bg-primary-50 text-gray-900 hover:text-primary-700 transition-colors duration-200 border border-gray-200 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-300"
+        aria-label="Chuyển đổi ngôn ngữ"
+        tabIndex={0}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') setIsOpen(!isOpen);
+        }}
       >
-        <Globe className="w-4 h-4" />
+        <Globe className="w-4 h-4" aria-hidden="true" />
         <span className="text-sm font-medium">
           {localeFlags[getCurrentLang()]} {localeNames[getCurrentLang()]}
         </span>
-        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
       </button>
 
       {isOpen && (

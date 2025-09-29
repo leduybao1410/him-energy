@@ -1,0 +1,81 @@
+{
+    "hero": {
+        "title": "Our Products",
+        "subtitle": "High-quality renewable energy solutions",
+        "description": "Explore our diverse collection of renewable energy products, from solar panels to modern energy storage systems."
+    },
+    "filters": {
+        "title": "Filter Products",
+        "all": "All",
+        "solar": "Solar Energy",
+        "wind": "Wind Energy",
+        "hydro": "Hydro Energy",
+        "battery": "Battery Storage",
+        "inverter": "Inverter",
+        "priceRange": "Price Range",
+        "search": "Search products...",
+        "sortBy": "Sort by",
+        "sortOptions": {
+            "newest": "Newest",
+            "priceLow": "Price: Low to High",
+            "priceHigh": "Price: High to Low",
+            "name": "Name A-Z"
+        }
+    },
+    "productGrid": {
+        "title": "Product List",
+        "noProducts": "No products found",
+        "loading": "Loading products...",
+        "viewDetails": "View Details",
+        "addToCart": "Add to Cart",
+        "price": "Price",
+        "category": "Category"
+    },
+    "productDetail": {
+        "backToProducts": "Back to Products",
+        "price": "Price",
+        "category": "Category",
+        "description": "Product Description",
+        "specifications": "Specifications",
+        "features": "Key Features",
+        "relatedProducts": "Related Products",
+        "contactForQuote": "Contact for Quote",
+        "addToCart": "Add to Cart",
+        "share": "Share",
+        "gallery": "Gallery",
+        "reviews": "Reviews",
+        "warranty": "Warranty",
+        "delivery": "Delivery"
+    },
+    "categories": {
+        "solar": {
+            "title": "Solar Energy",
+            "description": "Solar panels and solar energy systems"
+        },
+        "wind": {
+            "title": "Wind Energy",
+            "description": "Wind turbines and wind energy systems"
+        },
+        "hydro": {
+            "title": "Hydro Energy",
+            "description": "Mini and micro hydroelectric systems"
+        },
+        "battery": {
+            "title": "Battery Storage",
+            "description": "Energy storage systems"
+        },
+        "inverter": {
+            "title": "Inverter",
+            "description": "Inverters and energy conversion devices"
+        }
+    },
+    "pagination": {
+        "previous": "Previous",
+        "next": "Next",
+        "page": "Page",
+        "of": "of",
+        "showing": "Showing",
+        "to": "to",
+        "results": "results"
+    }
+}

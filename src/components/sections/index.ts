@@ -17,3 +17,7 @@ export { default as ContactHeroSection } from './ContactHeroSection';
 export { default as ContactInfoSection } from './ContactInfoSection';
 export { default as ContactFormSection } from './ContactFormSection';
 export { default as ContactMapSection } from './ContactMapSection';
+export { default as ProductHeroSection } from './ProductHeroSection';
+export { default as ProductFilterSection } from './ProductFilterSection';
+export { default as ProductGridSection } from './ProductGridSection';
+export { default as ProductDetailSection } from './ProductDetailSection';

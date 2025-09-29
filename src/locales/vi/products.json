@@ -1,0 +1,81 @@
+{
+    "hero": {
+        "title": "Sản phẩm của chúng tôi",
+        "subtitle": "Giải pháp năng lượng tái tạo chất lượng cao",
+        "description": "Khám phá bộ sưu tập sản phẩm năng lượng tái tạo đa dạng, từ tấm pin mặt trời đến hệ thống lưu trữ năng lượng hiện đại."
+    },
+    "filters": {
+        "title": "Lọc sản phẩm",
+        "all": "Tất cả",
+        "solar": "Năng lượng mặt trời",
+        "wind": "Năng lượng gió",
+        "hydro": "Năng lượng nước",
+        "battery": "Pin lưu trữ",
+        "inverter": "Biến tần",
+        "priceRange": "Khoảng giá",
+        "search": "Tìm kiếm sản phẩm...",
+        "sortBy": "Sắp xếp theo",
+        "sortOptions": {
+            "newest": "Mới nhất",
+            "priceLow": "Giá thấp đến cao",
+            "priceHigh": "Giá cao đến thấp",
+            "name": "Tên A-Z"
+        }
+    },
+    "productGrid": {
+        "title": "Danh sách sản phẩm",
+        "noProducts": "Không tìm thấy sản phẩm nào",
+        "loading": "Đang tải sản phẩm...",
+        "viewDetails": "Xem chi tiết",
+        "addToCart": "Thêm vào giỏ",
+        "price": "Giá",
+        "category": "Danh mục"
+    },
+    "productDetail": {
+        "backToProducts": "Quay lại danh sách",
+        "price": "Giá",
+        "category": "Danh mục",
+        "description": "Mô tả sản phẩm",
+        "specifications": "Thông số kỹ thuật",
+        "features": "Tính năng nổi bật",
+        "relatedProducts": "Sản phẩm liên quan",
+        "contactForQuote": "Liên hệ báo giá",
+        "addToCart": "Thêm vào giỏ hàng",
+        "share": "Chia sẻ",
+        "gallery": "Thư viện ảnh",
+        "reviews": "Đánh giá",
+        "warranty": "Bảo hành",
+        "delivery": "Giao hàng"
+    },
+    "categories": {
+        "solar": {
+            "title": "Năng lượng mặt trời",
+            "description": "Tấm pin mặt trời và hệ thống năng lượng mặt trời"
+        },
+        "wind": {
+            "title": "Năng lượng gió",
+            "description": "Turbine gió và hệ thống năng lượng gió"
+        },
+        "hydro": {
+            "title": "Năng lượng nước",
+            "description": "Hệ thống thủy điện mini và micro"
+        },
+        "battery": {
+            "title": "Pin lưu trữ",
+            "description": "Hệ thống lưu trữ năng lượng"
+        },
+        "inverter": {
+            "title": "Biến tần",
+            "description": "Biến tần và thiết bị chuyển đổi năng lượng"
+        }
+    },
+    "pagination": {
+        "previous": "Trước",
+        "next": "Tiếp",
+        "page": "Trang",
+        "of": "của",
+        "showing": "Hiển thị",
+        "to": "đến",
+        "results": "kết quả"
+    }
+}
