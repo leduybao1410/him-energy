@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Container, Section, Button, Input, Select } from '@/components/ui';
 import { ProductFilters } from '@/types/product';
+import { XIcon } from 'lucide-react';
 
 interface ProductFilterSectionProps {
     filters: ProductFilters;
@@ -30,8 +31,8 @@ const ProductFilterSection = ({
 
     const sortOptions = [
         { value: 'newest', label: t('sortOptions.newest') },
-        { value: 'priceLow', label: t('sortOptions.priceLow') },
-        { value: 'priceHigh', label: t('sortOptions.priceHigh') },
+        // { value: 'priceLow', label: t('sortOptions.priceLow') },
+        // { value: 'priceHigh', label: t('sortOptions.priceHigh') },
         { value: 'name', label: t('sortOptions.name') },
     ];
 
@@ -54,26 +55,19 @@ const ProductFilterSection = ({
     };
 
     return (
-        <Section className="bg-white border-b">
+        <Section className=" border-b">
             <Container>
-                <div className="py-8">
-                    <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between mb-6">
+                <div className="flex flex-row gap-2 items-center">
+                    <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
                         <div className="flex items-center gap-4">
                             <h2 className="text-2xl font-bold text-primary">{t('title')}</h2>
                             <span className="text-muted-foreground">
                                 {totalProducts} sản phẩm
                             </span>
                         </div>
-                        <Button
-                            variant="outline"
-                            onClick={clearFilters}
-                            className="text-sm"
-                        >
-                            Xóa bộ lọc
-                        </Button>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         {/* Search */}
                         <div className="lg:col-span-2">
                             <Input
@@ -108,9 +102,13 @@ const ProductFilterSection = ({
                             ))}
                         </Select>
                     </div>
+                    <button
 
+                        className="text-sm hover:bg-gray-200 transition-all duration-300 text-black p-2 rounded-full" onClick={clearFilters}>
+                        <XIcon className="w-4 h-4" />
+                    </button>
                     {/* Price Range */}
-                    <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {/* <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                             <label className="block text-sm font-medium text-secondary mb-2">
                                 Giá tối thiểu
@@ -141,7 +139,7 @@ const ProductFilterSection = ({
                                 })}
                             />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </Container>
         </Section>

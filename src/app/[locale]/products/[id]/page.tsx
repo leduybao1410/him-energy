@@ -9,99 +9,7 @@ import {
     ContactSection
 } from "@/components/sections";
 import { Product, RelatedProduct } from '@/types/product';
-
-// Mock data - sẽ thay thế bằng API call thực tế
-const mockProducts: Product[] = [
-    {
-        id: 1,
-        name: "Tấm Pin Mặt Trời Mono 300W",
-        slug: "tam-pin-mat-troi-mono-300w",
-        description: "Tấm pin mặt trời mono silicon hiệu suất cao, phù hợp cho hệ thống điện mặt trời dân dụng và thương mại. Sản phẩm được sản xuất với công nghệ tiên tiến, đảm bảo hiệu suất chuyển đổi năng lượng tối ưu và độ bền cao trong mọi điều kiện thời tiết.",
-        price: 2500000,
-        category: "solar",
-        image_url: "/solar.svg"
-    },
-    {
-        id: 2,
-        name: "Turbine Gió 1KW",
-        slug: "turbine-gio-1kw",
-        description: "Turbine gió công suất 1KW, thiết kế tối ưu cho vùng có tốc độ gió trung bình. Hệ thống được trang bị công nghệ điều khiển thông minh, tự động điều chỉnh góc cánh quạt để tối ưu hóa hiệu suất thu năng lượng gió.",
-        price: 15000000,
-        category: "wind",
-        image_url: "/wind.svg"
-    },
-    {
-        id: 3,
-        name: "Pin Lưu Trữ Lithium 5KWh",
-        slug: "pin-luu-tru-lithium-5kwh",
-        description: "Hệ thống pin lưu trữ lithium-ion công nghệ cao, dung lượng 5KWh. Pin được thiết kế với công nghệ BMS (Battery Management System) thông minh, đảm bảo an toàn và kéo dài tuổi thọ pin.",
-        price: 18000000,
-        category: "battery",
-        image_url: "/hydro.svg"
-    },
-    {
-        id: 4,
-        name: "Biến Tần Hybrid 5KW",
-        slug: "bien-tan-hybrid-5kw",
-        description: "Biến tần hybrid công suất 5KW, tích hợp MPPT và bộ sạc pin. Hệ thống cho phép kết nối đồng thời với lưới điện, pin lưu trữ và tải tiêu thụ, mang lại tính linh hoạt cao trong việc quản lý năng lượng.",
-        price: 12000000,
-        category: "inverter",
-        image_url: "/solar.svg"
-    },
-    {
-        id: 5,
-        name: "Tấm Pin Poly 250W",
-        slug: "tam-pin-poly-250w",
-        description: "Tấm pin mặt trời poly silicon, giá cả hợp lý cho các dự án quy mô lớn. Sản phẩm được thiết kế với khung nhôm chắc chắn, chống ăn mòn và chịu được tải trọng gió lớn.",
-        price: 2000000,
-        category: "solar",
-        image_url: "/solar.svg"
-    },
-    {
-        id: 6,
-        name: "Turbine Gió 500W",
-        slug: "turbine-gio-500w",
-        description: "Turbine gió mini công suất 500W, phù hợp cho hộ gia đình. Thiết kế nhỏ gọn, dễ lắp đặt và vận hành, phù hợp cho các khu vực có tốc độ gió thấp đến trung bình.",
-        price: 8000000,
-        category: "wind",
-        image_url: "/wind.svg"
-    }
-];
-
-const mockRelatedProducts: RelatedProduct[] = [
-    {
-        id: 2,
-        name: "Turbine Gió 1KW",
-        slug: "turbine-gio-1kw",
-        price: 15000000,
-        image_url: "/wind.svg",
-        category: "wind"
-    },
-    {
-        id: 3,
-        name: "Pin Lưu Trữ Lithium 5KWh",
-        slug: "pin-luu-tru-lithium-5kwh",
-        price: 18000000,
-        image_url: "/hydro.svg",
-        category: "battery"
-    },
-    {
-        id: 4,
-        name: "Biến Tần Hybrid 5KW",
-        slug: "bien-tan-hybrid-5kw",
-        price: 12000000,
-        image_url: "/solar.svg",
-        category: "inverter"
-    },
-    {
-        id: 5,
-        name: "Tấm Pin Poly 250W",
-        slug: "tam-pin-poly-250w",
-        price: 2000000,
-        image_url: "/solar.svg",
-        category: "solar"
-    }
-];
+import { mockProducts, mockRelatedProducts } from '../page';
 
 export default function ProductDetail() {
     const params = useParams();
@@ -127,7 +35,7 @@ export default function ProductDetail() {
                 const related = mockRelatedProducts.filter(
                     p => p.category === foundProduct.category && p.id !== foundProduct.id
                 );
-                setRelatedProducts(related);
+                setRelatedProducts(related)
             }
 
             setLoading(false);

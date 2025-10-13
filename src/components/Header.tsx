@@ -109,15 +109,15 @@ const Header = () => {
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden lg:flex items-center gap-6">
+                    <nav className="hidden lg:flex items-center gap-2">
                         {navigationItems.map((item) => (
                             <div key={item.name} className="relative group">
                                 {item.isExternal === false ? (
                                     <Link
                                         href={item.href}
-                                        className={`flex items-center space-x-1 px-4 py-2 rounded-lg transition-all duration-500 ${textClasses.nav}`}
+                                        className={`flex flex-nowrap items-center space-x-1 p-2 rounded-lg transition-all duration-500 ${textClasses.nav}`}
                                     >
-                                        <span>{item.name}</span>
+                                        <span className="whitespace-nowrap">{item.name}</span>
                                     </Link>
                                 ) : (
                                     <a

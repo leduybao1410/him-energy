@@ -41,9 +41,10 @@ const LanguageSwitcher = () => {
           if (e.key === 'Enter' || e.key === ' ') setIsOpen(!isOpen);
         }}
       >
-        <Globe className="w-4 h-4" aria-hidden="true" />
+        {/* <Globe className="w-4 h-4" aria-hidden="true" /> */}
         <span className="text-sm font-medium">
-          {localeFlags[getCurrentLang()]} {localeNames[getCurrentLang()]}
+          {localeFlags[getCurrentLang()]}
+          {/* {localeNames[getCurrentLang()]} */}
         </span>
         <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
       </button>

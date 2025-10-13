@@ -9,10 +9,12 @@ import {
     ProductGridSection,
     ContactSection
 } from "@/components/sections";
-import { Product, ProductFilters, ProductListResponse } from '@/types/product';
+import { Product, ProductFilters, RelatedProduct } from '@/types/product';
 
+
+export const mockFeatures = ["Chất lượng cao, bền bỉ", "Bảo hành 25 năm", "Hiệu suất cao, tiết kiệm năng lượng", "Dễ dàng lắp đặt và bảo trì"]
 // Mock data - sẽ thay thế bằng API call thực tế
-const mockProducts: Product[] = [
+export const mockProducts: Product[] = [
     {
         id: 1,
         name: "Tấm Pin Mặt Trời Mono 300W",
@@ -20,7 +22,17 @@ const mockProducts: Product[] = [
         description: "Tấm pin mặt trời mono silicon hiệu suất cao, phù hợp cho hệ thống điện mặt trời dân dụng và thương mại.",
         price: 2500000,
         category: "solar",
-        image_url: "/solar.svg"
+        image_url: ["/solar.svg"],
+        features: mockFeatures,
+        thumbnail_url: "/solar.svg",
+        specifications: {
+            capacity: "300W",
+            efficiency: "20.5%",
+            size: "1956 x 992 x 40mm",
+            weight: "10kg",
+            warranty: "25 năm",
+            origin: "Việt Nam"
+        }
     },
     {
         id: 2,
@@ -29,7 +41,17 @@ const mockProducts: Product[] = [
         description: "Turbine gió công suất 1KW, thiết kế tối ưu cho vùng có tốc độ gió trung bình.",
         price: 15000000,
         category: "wind",
-        image_url: "/wind.svg"
+        image_url: ["/wind.svg"],
+        features: mockFeatures,
+        thumbnail_url: "/wind.svg",
+        specifications: {
+            capacity: "1KW",
+            efficiency: "20.5%",
+            size: "1956 x 992 x 40mm",
+            weight: "10kg",
+            warranty: "25 năm",
+            origin: "Việt Nam"
+        }
     },
     {
         id: 3,
@@ -38,7 +60,17 @@ const mockProducts: Product[] = [
         description: "Hệ thống pin lưu trữ lithium-ion công nghệ cao, dung lượng 5KWh.",
         price: 18000000,
         category: "battery",
-        image_url: "/hydro.svg"
+        image_url: ["/hydro.svg"],
+        features: mockFeatures,
+        thumbnail_url: "/hydro.svg",
+        specifications: {
+            capacity: "5KWh",
+            efficiency: "20.5%",
+            size: "1956 x 992 x 40mm",
+            weight: "10kg",
+            warranty: "25 năm",
+            origin: "Việt Nam"
+        }
     },
     {
         id: 4,
@@ -47,7 +79,17 @@ const mockProducts: Product[] = [
         description: "Biến tần hybrid công suất 5KW, tích hợp MPPT và bộ sạc pin.",
         price: 12000000,
         category: "inverter",
-        image_url: "/solar.svg"
+        image_url: ["/solar.svg"],
+        features: mockFeatures,
+        thumbnail_url: "/solar.svg",
+        specifications: {
+            capacity: "5KW",
+            efficiency: "20.5%",
+            size: "1956 x 992 x 40mm",
+            weight: "10kg",
+            warranty: "25 năm",
+            origin: "Việt Nam"
+        }
     },
     {
         id: 5,
@@ -56,7 +98,17 @@ const mockProducts: Product[] = [
         description: "Tấm pin mặt trời poly silicon, giá cả hợp lý cho các dự án quy mô lớn.",
         price: 2000000,
         category: "solar",
-        image_url: "/solar.svg"
+        image_url: ["/solar.svg"],
+        features: mockFeatures,
+        thumbnail_url: "/solar.svg",
+        specifications: {
+            capacity: "250W",
+            efficiency: "20.5%",
+            size: "1956 x 992 x 40mm",
+            weight: "10kg",
+            warranty: "25 năm",
+            origin: "Việt Nam"
+        }
     },
     {
         id: 6,
@@ -65,9 +117,68 @@ const mockProducts: Product[] = [
         description: "Turbine gió mini công suất 500W, phù hợp cho hộ gia đình.",
         price: 8000000,
         category: "wind",
-        image_url: "/wind.svg"
+        image_url: ["/wind.svg"],
+        features: mockFeatures,
+        thumbnail_url: "/wind.svg",
+        specifications: {
+            capacity: "500W",
+            efficiency: "20.5%",
+            size: "1956 x 992 x 40mm",
+            weight: "10kg",
+            warranty: "25 năm",
+            origin: "Việt Nam"
+        }
     }
 ];
+
+export const mockRelatedProducts: RelatedProduct[] = [
+    {
+        id: 1,
+        name: "Tấm Pin Mặt Trời Mono 300W",
+        slug: "tam-pin-mat-troi-mono-300w",
+        price: 15000000,
+        category: "solar",
+        thumbnail_url: "/solar.svg",
+        description: "Tấm Pin Mặt Trời Mono 300W"
+    },
+    {
+        id: 2,
+        name: "Turbine Gió 1KW",
+        slug: "turbine-gio-1kw",
+        price: 15000000,
+        category: "wind",
+        thumbnail_url: "/wind.svg",
+        description: "Turbine gió 1KW"
+    },
+    {
+        id: 3,
+        name: "Pin Lưu Trữ Lithium 5KWh",
+        slug: "pin-luu-tru-lithium-5kwh",
+        price: 18000000,
+        category: "battery",
+        thumbnail_url: "/hydro.svg",
+        description: "Pin Lưu Trữ Lithium 5KWh"
+    },
+    {
+        id: 4,
+        name: "Biến Tần Hybrid 5KW",
+        slug: "bien-tan-hybrid-5kw",
+        price: 12000000,
+        category: "inverter",
+        thumbnail_url: "/solar.svg",
+        description: "Biến Tần Hybrid 5KW"
+    },
+    {
+        id: 5,
+        name: "Tấm Pin Poly 250W",
+        slug: "tam-pin-poly-250w",
+        price: 2000000,
+        category: "solar",
+        thumbnail_url: "/solar.svg",
+        description: "Tấm Pin Poly 250W"
+    }
+];
+
 
 export default function Products() {
     const [products, setProducts] = useState<Product[]>([]);

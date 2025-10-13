@@ -76,16 +76,18 @@ const ProductGridSection = ({
     return (
         <Section className="py-16">
             <Container>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3  gap-6 mb-12">
                     {products.map((product) => (
                         <Card key={product.id} className="group hover:shadow-lg transition-all duration-300">
                             <div className="relative aspect-square overflow-hidden rounded-t-lg">
-                                <Image
-                                    src={product.image_url}
-                                    alt={product.name}
-                                    fill
-                                    className="object-cover group-hover:scale-105 transition-transform duration-300"
-                                />
+                                <Link href={`/products/${product.id}`}>
+                                    <Image
+                                        src={product.image_url[0]}
+                                        alt={product.name}
+                                        fill
+                                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                    />
+                                </Link>
                                 <div className="absolute top-2 left-2 bg-primary-600 p-1 rounded-lg">
                                     <span className="bg-primary text-white px-2 py-1 rounded-full text-xs font-medium">
                                         {getCategoryLabel(product.category)}
@@ -94,29 +96,18 @@ const ProductGridSection = ({
                             </div>
 
                             <div className="p-6">
-                                <h3 className="text-lg font-semibold text-primary mb-2 line-clamp-2">
-                                    {product.name}
-                                </h3>
-
+                                <Link href={`/products/${product.id}`}>
+                                    <h3 className="text-lg font-semibold text-primary mb-2 line-clamp-2">
+                                        {product.name}
+                                    </h3>
+                                </Link>
                                 <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
                                     {product.description}
                                 </p>
-
                                 <div className="flex items-center justify-between mb-4">
                                     <span className="text-2xl font-bold text-accent">
                                         {formatPrice(product.price)}
                                     </span>
-                                </div>
-
-                                <div className="flex gap-2">
-                                    <Link href={`/products/${product.id}`} className="flex-1">
-                                        <Button className="w-full" variant="outline">
-                                            {t('viewDetails')}
-                                        </Button>
-                                    </Link>
-                                    <Button className="flex-1">
-                                        {t('addToCart')}
-                                    </Button>
                                 </div>
                             </div>
                         </Card>
