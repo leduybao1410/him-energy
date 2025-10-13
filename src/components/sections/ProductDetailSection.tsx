@@ -63,22 +63,24 @@ const ProductDetailSection = ({ product, relatedProducts }: ProductDetailSection
                         </div>
 
                         {/* Image Gallery */}
-                        <div className="grid grid-cols-4 gap-2">
-                            {product.image_url.map((image, index) => (
-                                <div
-                                    key={index}
-                                    className="aspect-square relative overflow-hidden rounded-lg cursor-pointer border-2 border-transparent hover:border-primary transition-colors"
-                                    onClick={() => setSelectedImage([image])}
-                                >
-                                    <Image
-                                        src={image}
-                                        alt={`${product.name} ${index + 1}`}
-                                        fill
-                                        className="object-cover"
-                                    />
-                                </div>
-                            ))}
-                        </div>
+                        {Array.isArray(product.image_url) && product.image_url.length > 1 && (
+                            <div className="grid grid-cols-4 gap-2">
+                                {product.image_url.map((image, index) => (
+                                    <div
+                                        key={index}
+                                        className="aspect-square relative overflow-hidden rounded-lg cursor-pointer border-2 border-transparent hover:border-primary transition-colors"
+                                        onClick={() => setSelectedImage([image])}
+                                    >
+                                        <Image
+                                            src={image}
+                                            alt={`${product.name} ${index + 1}`}
+                                            fill
+                                            className="object-cover"
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        )}
                     </div>
 
                     {/* Product Info */}
@@ -107,12 +109,18 @@ const ProductDetailSection = ({ product, relatedProducts }: ProductDetailSection
                                 {t('features')}
                             </h3>
                             <ul className="space-y-2 text-muted-foreground">
-                                {product.features.map((feature, index) => (
-                                    <li key={index} className="flex items-center gap-2">
-                                        <CheckCircle className="w-5 h-5 text-primary-500 flex-shrink-0" />
-                                        {feature}
+                                {Array.isArray(product.features) && product.features.length > 0 ? (
+                                    product.features.map((feature, index) => (
+                                        <li key={index} className="flex items-center gap-2">
+                                            <CheckCircle className="w-5 h-5 text-primary-500 flex-shrink-0" />
+                                            {feature}
+                                        </li>
+                                    ))
+                                ) : (
+                                    <li className="text-muted-foreground italic">
+                                        {t('noFeaturesAvailable') || 'No features available'}
                                     </li>
-                                ))}
+                                )}
                             </ul>
                         </Card>
                     </div>

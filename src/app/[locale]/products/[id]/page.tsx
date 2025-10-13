@@ -9,7 +9,8 @@ import {
     ContactSection
 } from "@/components/sections";
 import { Product, RelatedProduct } from '@/types/product';
-import { mockProducts, mockRelatedProducts } from '../page';
+
+type Params = Promise<{ id: string }>;
 
 export default function ProductDetail() {
     const params = useParams();
@@ -18,31 +19,74 @@ export default function ProductDetail() {
     const [product, setProduct] = useState<Product | null>(null);
     const [relatedProducts, setRelatedProducts] = useState<RelatedProduct[]>([]);
     const [loading, setLoading] = useState(true);
+    const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchProduct = async () => {
             setLoading(true);
+            setError(null);
 
-            // Simulate API delay
-            await new Promise(resolve => setTimeout(resolve, 500));
+            try {
+                // Fetch product details from API
+                const response = await fetch(`/api/products/${productId}`);
 
-            // Find product by ID
-            const foundProduct = mockProducts.find(p => p.id === productId);
+                if (!response.ok) {
+                    if (response.status === 404) {
+                        setError('Sản phẩm không tồn tại');
+                    } else {
+                        setError('Không thể tải thông tin sản phẩm');
+                    }
+                    setLoading(false);
+                    return;
+                }
 
-            if (foundProduct) {
-                setProduct(foundProduct);
-                // Get related products (same category, excluding current product)
-                const related = mockRelatedProducts.filter(
-                    p => p.category === foundProduct.category && p.id !== foundProduct.id
-                );
-                setRelatedProducts(related)
+                const productData: Product = await response.json();
+
+                // Ensure features and image_url are always arrays
+                const transformedProduct: Product = {
+                    ...productData,
+                    features: Array.isArray(productData.features)
+                        ? productData.features
+                        : productData.features
+                            ? [productData.features]
+                            : [],
+                    image_url: Array.isArray(productData.image_url)
+                        ? productData.image_url
+                        : productData.image_url
+                            ? [productData.image_url]
+                            : [productData.thumbnail_url || '/solar.svg']
+                };
+
+                setProduct(transformedProduct);
+
+                // Fetch related products from the same category
+                try {
+                    const relatedResponse = await fetch(`/api/products?category=${productData.category}&per_page=4`);
+                    if (relatedResponse.ok) {
+                        const relatedData = await relatedResponse.json();
+                        const related = relatedData.products
+                            ?.filter((p: Product) => p.id !== productData.id)
+                            ?.slice(0, 3) || [];
+                        setRelatedProducts(related);
+                    }
+                } catch (relatedError) {
+                    console.warn('Failed to fetch related products:', relatedError);
+                    // Don't set error for related products failure, just log it
+                }
+
+            } catch (error) {
+                console.error('Error fetching product:', error);
+                setError('Đã xảy ra lỗi khi tải dữ liệu');
             }
 
             setLoading(false);
         };
 
-        if (productId) {
+        if (productId && !isNaN(productId)) {
             fetchProduct();
+        } else {
+            setError('ID sản phẩm không hợp lệ');
+            setLoading(false);
         }
     }, [productId]);
 
@@ -61,7 +105,7 @@ export default function ProductDetail() {
         );
     }
 
-    if (!product) {
+    if (error || (!loading && !product)) {
         return (
             <div className="min-h-screen bg-secondary w-full align-center justify-center">
                 <Header />
@@ -69,10 +113,13 @@ export default function ProductDetail() {
                     <div className="text-center">
                         <div className="text-6xl mb-4">❌</div>
                         <h1 className="text-2xl font-bold text-primary mb-2">
-                            Không tìm thấy sản phẩm
+                            {error || 'Không tìm thấy sản phẩm'}
                         </h1>
                         <p className="text-muted-foreground">
-                            Sản phẩm bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.
+                            {error === 'Sản phẩm không tồn tại'
+                                ? 'Sản phẩm bạn đang tìm kiếm không tồn tại hoặc đã bị xóa.'
+                                : 'Vui lòng thử lại sau hoặc liên hệ với chúng tôi để được hỗ trợ.'
+                            }
                         </p>
                     </div>
                 </div>
@@ -84,10 +131,12 @@ export default function ProductDetail() {
     return (
         <div className="min-h-screen bg-secondary w-full align-center justify-center">
             <Header />
-            <ProductDetailSection
-                product={product}
-                relatedProducts={relatedProducts}
-            />
+            {product && (
+                <ProductDetailSection
+                    product={product}
+                    relatedProducts={relatedProducts}
+                />
+            )}
             <ContactSection />
             <Footer />
         </div>
