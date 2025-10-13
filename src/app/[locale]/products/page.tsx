@@ -190,72 +190,54 @@ export default function Products() {
     const [totalPages, setTotalPages] = useState(1);
     const [totalProducts, setTotalProducts] = useState(0);
 
-    // Mock API call
+    // Real API call to get products
     const fetchProducts = async (currentFilters: ProductFilters) => {
         setLoading(true);
 
-        // Simulate API delay
-        await new Promise(resolve => setTimeout(resolve, 500));
+        try {
+            // Build query parameters
+            const queryParams = new URLSearchParams();
 
-        let filteredProducts = [...mockProducts];
-
-        // Apply filters
-        if (currentFilters.category) {
-            filteredProducts = filteredProducts.filter(
-                product => product.category === currentFilters.category
-            );
-        }
-
-        if (currentFilters.search) {
-            filteredProducts = filteredProducts.filter(
-                product =>
-                    product.name.toLowerCase().includes(currentFilters.search!.toLowerCase()) ||
-                    product.description.toLowerCase().includes(currentFilters.search!.toLowerCase())
-            );
-        }
-
-        if (currentFilters.min_price) {
-            filteredProducts = filteredProducts.filter(
-                product => product.price >= currentFilters.min_price!
-            );
-        }
-
-        if (currentFilters.max_price) {
-            filteredProducts = filteredProducts.filter(
-                product => product.price <= currentFilters.max_price!
-            );
-        }
-
-        // Apply sorting
-        if (currentFilters.sort) {
-            switch (currentFilters.sort) {
-                case 'priceLow':
-                    filteredProducts.sort((a, b) => a.price - b.price);
-                    break;
-                case 'priceHigh':
-                    filteredProducts.sort((a, b) => b.price - a.price);
-                    break;
-                case 'name':
-                    filteredProducts.sort((a, b) => a.name.localeCompare(b.name));
-                    break;
-                default: // newest
-                    filteredProducts.sort((a, b) => b.id - a.id);
+            if (currentFilters.category) {
+                queryParams.append('category', currentFilters.category);
             }
+            if (currentFilters.search) {
+                queryParams.append('search', currentFilters.search);
+            }
+            if (currentFilters.min_price) {
+                queryParams.append('min_price', currentFilters.min_price.toString());
+            }
+            if (currentFilters.max_price) {
+                queryParams.append('max_price', currentFilters.max_price.toString());
+            }
+            if (currentFilters.sort) {
+                queryParams.append('sort', currentFilters.sort);
+            }
+            if (currentFilters.page) {
+                queryParams.append('page', currentFilters.page.toString());
+            }
+            if (currentFilters.per_page) {
+                queryParams.append('per_page', currentFilters.per_page.toString());
+            }
+
+            // Make API call
+            const response = await fetch(`/api/products?${queryParams.toString()}`);
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch products');
+            }
+
+            const data = await response.json();
+            setProducts(data.products);
+            setTotalPages(data.totalPages);
+            setTotalProducts(data.totalProducts);
+        } catch (error) {
+            console.error('Error fetching products:', error);
+            setTotalPages(1);
+            setTotalProducts(0);
+        } finally {
+            setLoading(false);
         }
-
-        // Pagination
-        const page = currentFilters.page || 1;
-        const perPage = currentFilters.per_page || 12;
-        const startIndex = (page - 1) * perPage;
-        const endIndex = startIndex + perPage;
-
-        const paginatedProducts = filteredProducts.slice(startIndex, endIndex);
-        const totalPages = Math.ceil(filteredProducts.length / perPage);
-
-        setProducts(paginatedProducts);
-        setTotalPages(totalPages);
-        setTotalProducts(filteredProducts.length);
-        setLoading(false);
     };
 
     useEffect(() => {
