@@ -63,11 +63,15 @@ export default function ProductDetail() {
                 try {
                     const relatedResponse = await fetch(`/api/products?category=${productData.category}&per_page=4`);
                     if (relatedResponse.ok) {
-                        const relatedData = await relatedResponse.json();
-                        const related = relatedData.products
-                            ?.filter((p: Product) => p.id !== productData.id)
-                            ?.slice(0, 3) || [];
-                        setRelatedProducts(related);
+                        const data = await relatedResponse.json();
+                        console.log(data);
+                        if (data.products && data.products.length > 0) {
+                            console.log(productData.id);
+                            const related = data.products
+                                ?.filter((p: Product) => p.id != productData.id)
+                                ?.slice(0, 4) || [];
+                            setRelatedProducts(related);
+                        }
                     }
                 } catch (relatedError) {
                     console.warn('Failed to fetch related products:', relatedError);
@@ -93,14 +97,12 @@ export default function ProductDetail() {
     if (loading) {
         return (
             <div className="min-h-screen bg-secondary w-full align-center justify-center">
-                <Header />
                 <div className="flex items-center justify-center min-h-[50vh]">
                     <div className="text-center">
                         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
                         <p className="text-muted-foreground">Đang tải thông tin sản phẩm...</p>
                     </div>
                 </div>
-                <Footer />
             </div>
         );
     }
@@ -108,7 +110,6 @@ export default function ProductDetail() {
     if (error || (!loading && !product)) {
         return (
             <div className="min-h-screen bg-secondary w-full align-center justify-center">
-                <Header />
                 <div className="flex items-center justify-center min-h-[50vh]">
                     <div className="text-center">
                         <div className="text-6xl mb-4">❌</div>
@@ -123,14 +124,12 @@ export default function ProductDetail() {
                         </p>
                     </div>
                 </div>
-                <Footer />
             </div>
         );
     }
 
     return (
         <div className="min-h-screen bg-secondary w-full align-center justify-center">
-            <Header />
             {product && (
                 <ProductDetailSection
                     product={product}
@@ -138,7 +137,6 @@ export default function ProductDetail() {
                 />
             )}
             <ContactSection />
-            <Footer />
         </div>
     );
 }

@@ -3,6 +3,8 @@ import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { Inter } from "next/font/google";
 import "../globals.css";
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -34,7 +36,9 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body className={inter.className}>
         <NextIntlClientProvider messages={messages}>
+          <Header />
           {children}
+          <Footer />
         </NextIntlClientProvider>
       </body>
     </html>

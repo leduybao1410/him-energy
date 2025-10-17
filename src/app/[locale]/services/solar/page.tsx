@@ -71,7 +71,6 @@ export default function SolarEnergyPage() {
 
     return (
         <div className="min-h-screen bg-secondary w-full">
-            <Header />
 
             {/* Hero Section */}
             <Section id="solar-hero" background="gradient">
@@ -169,8 +168,8 @@ export default function SolarEnergyPage() {
                                 </ul>
 
                                 <button className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${pkg.popular
-                                        ? 'bg-primary-600 hover:bg-primary-700 text-white'
-                                        : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
+                                    ? 'bg-primary-600 hover:bg-primary-700 text-white'
+                                    : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
                                     }`}>
                                     Tư vấn ngay
                                     <ArrowRight className="w-4 h-4" />
@@ -206,7 +205,6 @@ export default function SolarEnergyPage() {
                 </Container>
             </Section>
 
-            <Footer />
         </div>
     );
 }

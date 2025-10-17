@@ -1,105 +1,7 @@
+import { serverRouteMap } from '@/constants/server-route/server-route-map';
+import { setAuthorizationHeader } from '@/lib/api/apiFetch';
+import { CONTENT_TYPE_APPLICATION_JSON } from '@/lib/utils';
 import { NextResponse } from 'next/server';
-import { Product } from '@/types/product';
-
-const mockProducts: Product[] = [
-    {
-        id: 1,
-        name: 'Tấm Pin Poly 250W',
-        slug: 'tam-pin-poly-250w',
-        price: 3500000,
-        category: 'solar',
-        thumbnail_url: '/solar.svg',
-        description: 'Tấm Pin Poly 250W',
-        features: ['Chất lượng cao, bền bỉ', 'Bảo hành 25 năm', 'Hiệu suất cao, tiết kiệm năng lượng'],
-        image_url: ['/solar.svg'],
-        specifications: {
-            capacity: '250W',
-            efficiency: '20.5%',
-            size: '1956 x 992 x 40mm',
-            weight: '10kg',
-            warranty: '25 năm',
-            origin: 'Việt Nam'
-        }
-    },
-    {
-        id: 2,
-        name: 'Bộ hòa lưới Inverter 3kW',
-        slug: 'bo-hoa-luoi-inverter-3kw',
-        price: 16800000,
-        category: 'inverter',
-        thumbnail_url: '/solar.svg',
-        description: 'Bộ hòa lưới Inverter 3kW',
-        features: ['Chất lượng cao, bền bỉ', 'Bảo hành 25 năm', 'Hiệu suất cao, tiết kiệm năng lượng'],
-        image_url: ['/solar.svg'],
-        specifications: {
-            capacity: '3kW',
-            efficiency: '20.5%',
-            size: '1956 x 992 x 40mm',
-            weight: '10kg',
-            warranty: '25 năm',
-            origin: 'Việt Nam'
-        }
-    },
-    {
-        id: 3,
-        name: 'Khung giàn nhôm định hình',
-        slug: 'khung-gian-nhom-dinh-hinh',
-        price: 1100000,
-        category: 'solar',
-        thumbnail_url: '/solar.svg',
-        description: 'Khung giàn nhôm định hình',
-        features: ['Chất lượng cao, bền bỉ', 'Bảo hành 25 năm', 'Hiệu suất cao, tiết kiệm năng lượng'],
-        image_url: ['/solar.svg'],
-        specifications: {
-            capacity: 'N/A',
-            efficiency: 'N/A',
-            size: '1956 x 992 x 40mm',
-            weight: '10kg',
-            warranty: '25 năm',
-            origin: 'Việt Nam'
-        }
-    },
-    {
-        id: 4,
-        name: 'Turbine Gió 1KW',
-        slug: 'turbine-gio-1kw',
-        price: 15000000,
-        category: 'wind',
-        thumbnail_url: '/wind.svg',
-        description: 'Turbine gió công suất 1KW, thiết kế tối ưu cho vùng có tốc độ gió trung bình.',
-        features: ['Chất lượng cao, bền bỉ', 'Bảo hành 25 năm', 'Hiệu suất cao, tiết kiệm năng lượng'],
-        image_url: ['/wind.svg'],
-        specifications: {
-            capacity: '1KW',
-            efficiency: '20.5%',
-            size: '1956 x 992 x 40mm',
-            weight: '10kg',
-            warranty: '25 năm',
-            origin: 'Việt Nam'
-        }
-    },
-    {
-        id: 5,
-        name: 'Pin Lưu Trữ Lithium 5KWh',
-        slug: 'pin-luu-tru-lithium-5kwh',
-        price: 18000000,
-        category: 'battery',
-        thumbnail_url: '/hydro.svg',
-        description: 'Hệ thống pin lưu trữ lithium-ion công nghệ cao, dung lượng 5KWh.',
-        features: ['Chất lượng cao, bền bỉ', 'Bảo hành 25 năm', 'Hiệu suất cao, tiết kiệm năng lượng'],
-        image_url: ['/hydro.svg'],
-        specifications: {
-            capacity: '5KWh',
-            efficiency: '20.5%',
-            size: '1956 x 992 x 40mm',
-            weight: '10kg',
-            warranty: '25 năm',
-            origin: 'Việt Nam'
-        }
-    }
-];
-
-// All filter options have been removed - returning all products
 
 export async function GET(request: Request) {
     try {
@@ -107,8 +9,10 @@ export async function GET(request: Request) {
         const page = Number(searchParams.get('page')) || 1;
         const per_page = Number(searchParams.get('per_page')) || 12;
 
-        const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/wp-json/custom/v1/products?page=${page}&per_page=${per_page}`;
-        const res = await fetch(apiUrl);
+        const apiUrl = `${serverRouteMap.products.list.url}?page=${page}&per_page=${per_page}`;
+        const res = await fetch(apiUrl, {
+            method: serverRouteMap.products.list.method,
+        });
 
         if (!res.ok) {
             return NextResponse.json(
@@ -152,3 +56,36 @@ export async function GET(request: Request) {
     }
 }
 
+
+
+
+export async function POST(request: Request) {
+    try {
+        const requestBody = await request.json();
+
+        const apiUrl = `${serverRouteMap.products.create.url}`;
+        const response = await fetch(apiUrl, {
+            method: serverRouteMap.products.create.method,
+            headers: {
+                ...CONTENT_TYPE_APPLICATION_JSON,
+                ...setAuthorizationHeader(request),
+            },
+            body: JSON.stringify(requestBody),
+        });
+
+        if (!response.ok) {
+            return NextResponse.json(
+                { error: 'Failed to create product' },
+                { status: response.status }
+            );
+        }
+
+        const data = await response.json();
+        return NextResponse.json(data);
+    } catch (error) {
+        return NextResponse.json(
+            { error: 'Internal Server Error' },
+            { status: 500 }
+        );
+    }
+}

@@ -20,13 +20,6 @@ const ProductDetailSection = ({ product, relatedProducts }: ProductDetailSection
     const tCategories = useTranslations('products.categories');
     const [selectedImage, setSelectedImage] = useState(product.image_url);
 
-    const formatPrice = (price: number) => {
-        return new Intl.NumberFormat('vi-VN', {
-            style: 'currency',
-            currency: 'VND'
-        }).format(price);
-    };
-
     const getCategoryLabel = (category: string) => {
         const categoryTranslations: Record<string, string> = {
             solar: tCategories('solar.title'),
@@ -92,9 +85,6 @@ const ProductDetailSection = ({ product, relatedProducts }: ProductDetailSection
                             <h1 className="text-3xl lg:text-4xl font-bold text-primary mb-4">
                                 {product.name}
                             </h1>
-                            <div className="text-3xl font-bold text-accent mb-6">
-                                {formatPrice(product.price)}
-                            </div>
                         </div>
 
                         <div className="prose prose-lg max-w-none">

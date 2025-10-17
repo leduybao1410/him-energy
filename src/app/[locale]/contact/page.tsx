@@ -11,13 +11,11 @@ import {
 export default function Contact() {
     return (
         <div className="min-h-screen bg-secondary w-full align-center justify-center">
-            <Header />
             <ContactHeroSection />
             <ContactInfoSection />
             <ContactFormSection />
             <ContactMapSection />
             <ContactSection />
-            <Footer />
         </div>
     );
 }

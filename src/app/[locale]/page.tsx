@@ -12,14 +12,12 @@ import {
 export default function Home() {
     return (
         <div className="min-h-screen bg-secondary w-full align-center justify-center">
-            <Header />
             <HeroSection />
             <AboutSection />
             <ServicesSection />
             <StatsSection />
             <TestimonialsSection />
             <ContactSection />
-            <Footer />
         </div>
     );
 }

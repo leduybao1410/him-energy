@@ -115,8 +115,6 @@ export default function ConsultingPage() {
 
     return (
         <div className="min-h-screen bg-secondary w-full">
-            <Header />
-
             {/* Hero Section */}
             <Section id="consulting-hero" background="gradient">
                 <Container maxWidth="6xl">
@@ -266,8 +264,8 @@ export default function ConsultingPage() {
                                 </ul>
 
                                 <button className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${pkg.popular
-                                        ? 'bg-primary-600 hover:bg-primary-700 text-white'
-                                        : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
+                                    ? 'bg-primary-600 hover:bg-primary-700 text-white'
+                                    : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
                                     }`}>
                                     Đăng ký tư vấn
                                     <ArrowRight className="w-4 h-4" />
@@ -303,7 +301,6 @@ export default function ConsultingPage() {
                 </Container>
             </Section>
 
-            <Footer />
         </div>
     );
 }

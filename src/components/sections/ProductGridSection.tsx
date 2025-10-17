@@ -104,11 +104,6 @@ const ProductGridSection = ({
                                 <p className="text-muted-foreground text-sm mb-4 line-clamp-3">
                                     {product.description}
                                 </p>
-                                <div className="flex items-center justify-between mb-4">
-                                    <span className="text-2xl font-bold text-accent">
-                                        {formatPrice(product.price)}
-                                    </span>
-                                </div>
                             </div>
                         </Card>
                     ))}

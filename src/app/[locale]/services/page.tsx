@@ -12,12 +12,10 @@ import {
 export default function Services() {
     return (
         <div className="min-h-screen bg-secondary w-full align-center justify-center">
-            <Header />
             <ServicesHeroSection />
             <ServicesOverviewSection />
             <ServicesProcessSection />
             <ContactSection />
-            <Footer />
         </div>
     );
 }

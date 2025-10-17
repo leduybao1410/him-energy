@@ -32,19 +32,19 @@ const Footer = () => {
     };
 
     const quickLinks = [
-        { name: 'Về chúng tôi', href: '#about' },
-        { name: 'Giải pháp', href: '#solutions' },
-        { name: 'Dự án', href: '#projects' },
-        { name: 'Tin tức', href: '#news' },
-        { name: 'Tuyển dụng', href: '#careers' },
-        { name: 'Liên hệ', href: '#contact' },
+        { name: 'Về chúng tôi', href: '/about' },
+        { name: 'Giải pháp', href: '/services' },
+        { name: 'Dự án', href: '/projects' },
+        { name: 'Tin tức', href: '/news' },
+        { name: 'Tuyển dụng', href: '/careers' },
+        { name: 'Liên hệ', href: '/contact' },
+        { name: 'Quản lý sản phẩm', href: '/admin/products' },
     ];
 
     const services = [
-        { name: 'Năng lượng Mặt trời', icon: Sun },
-        { name: 'Năng lượng Gió', icon: Wind },
-        { name: 'Tư vấn Năng lượng', icon: Leaf },
-        { name: 'Hệ thống Lưu trữ', icon: Zap },
+        { name: 'Năng lượng Mặt trời', icon: Sun, href: '/services/solar' },
+        { name: 'Năng lượng Gió', icon: Wind, href: '/services/wind' },
+        { name: 'Tư vấn Năng lượng', icon: Leaf, href: '/services/consulting' },
     ];
 
     const socialLinks = [
@@ -156,7 +156,7 @@ const Footer = () => {
                                 {services.map((service) => (
                                     <li key={service.name}>
                                         <a
-                                            href="#"
+                                            href={service.href}
                                             className="text-gray-300 hover:text-primary-400 transition-colors duration-300 flex items-center gap-3 group"
                                         >
                                             <div className="w-6 h-6 bg-primary-500/20 rounded-lg flex items-center justify-center group-hover:bg-primary-500/30 transition-colors duration-300">

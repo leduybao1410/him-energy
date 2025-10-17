@@ -19,19 +19,7 @@ const HeroSection = () => {
     };
 
     return (
-        <section className="relative min-h-screen overflow-hidden !flex items-center justify-center">
-            {/* Background with gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-br from-primary-900 via-secondary-500 to-primary-900">
-                <div className="absolute inset-0 bg-black/40"></div>
-            </div>
-
-            {/* Animated background elements */}
-            <div className="absolute inset-0 overflow-hidden">
-                <div className="absolute top-20 left-10 w-32 h-32 bg-primary-400/20 rounded-full animate-pulse"></div>
-                <div className="absolute top-40 right-20 w-24 h-24 bg-secondary-400/20 rounded-full animate-pulse delay-1000"></div>
-                <div className="absolute bottom-40 left-1/4 w-40 h-40 bg-cyan-400/20 rounded-full animate-pulse delay-2000"></div>
-            </div>
-
+        <HeroSectionBackground>
             <div className="relative z-10 bg-secondary-700/20 rounded-2xl mx-auto px-4 text-center text-white">
                 <div className="max-w-4xl mx-auto py-4">
                     <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
@@ -62,15 +50,32 @@ const HeroSection = () => {
                     </div>
                 </div>
             </div>
-
-            {/* Scroll indicator */}
-            <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-                <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
-                    <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
-                </div>
-            </div>
-        </section>
+        </HeroSectionBackground>
     );
 };
 
 export default HeroSection;
+
+export const HeroSectionBackground = ({ children, showArrow = false }: { children: React.ReactNode, showArrow?: boolean }) => {
+    return (
+        <section className="relative min-h-screen overflow-hidden !flex flex-1 items-center justify-center">
+            {/* Background with gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-br from-primary-900 via-secondary-500 to-primary-900">
+                <div className="absolute inset-0 bg-black/40"></div>
+            </div>
+
+            {/* Animated background elements */}
+            <div className="absolute inset-0 overflow-hidden">
+                <div className="absolute top-20 left-10 w-32 h-32 bg-primary-400/20 rounded-full animate-pulse"></div>
+                <div className="absolute top-40 right-20 w-24 h-24 bg-secondary-400/20 rounded-full animate-pulse delay-1000"></div>
+                <div className="absolute bottom-40 left-1/4 w-40 h-40 bg-cyan-400/20 rounded-full animate-pulse delay-2000"></div>
+            </div>
+            {children}
+            {showArrow && <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+                <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center">
+                    <div className="w-1 h-3 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+                </div>
+            </div>}
+        </section>
+    );
+};

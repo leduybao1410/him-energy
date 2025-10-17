@@ -5,15 +5,27 @@ interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
     label?: string;
     error?: string;
     className?: string;
+    containerClassName?: string;
+    textClassName?: string;
+    labelClassName?: string;
     children: ReactNode;
 }
 
 const Select = forwardRef<HTMLSelectElement, SelectProps>(
-    ({ label, error, className = '', children, ...props }, ref) => {
+    ({
+        label,
+        error,
+        className = '',
+        containerClassName = '',
+        textClassName = '',
+        labelClassName = '',
+        children,
+        ...props
+    }, ref) => {
         return (
-            <div className="w-full">
+            <div className={cn('w-full', containerClassName)}>
                 {label && (
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className={cn('block text-sm font-medium text-gray-700 mb-2', labelClassName)}>
                         {label}
                     </label>
                 )}
@@ -22,6 +34,7 @@ const Select = forwardRef<HTMLSelectElement, SelectProps>(
                     className={cn(
                         'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200',
                         error && 'border-red-500 focus:ring-red-500',
+                        textClassName,
                         className
                     )}
                     {...props}

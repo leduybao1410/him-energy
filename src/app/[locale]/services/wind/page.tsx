@@ -1,9 +1,8 @@
 'use client';
 
-import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Section, Container } from "@/components/ui";
-import { Wind, CheckCircle, ArrowRight, Shield, Zap, TrendingUp, Users, Volume2 } from 'lucide-react';
+import { Wind, CheckCircle, ArrowRight, Zap, TrendingUp, Users, Volume2 } from 'lucide-react';
 import Link from 'next/link';
 
 export default function WindPowerPage() {
@@ -93,8 +92,6 @@ export default function WindPowerPage() {
 
     return (
         <div className="min-h-screen bg-secondary w-full">
-            <Header />
-
             {/* Hero Section */}
             <Section id="wind-hero" background="gradient">
                 <Container maxWidth="6xl">
@@ -215,8 +212,8 @@ export default function WindPowerPage() {
                                 </ul>
 
                                 <button className={`w-full py-3 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center gap-2 ${turbine.popular
-                                        ? 'bg-primary-600 hover:bg-primary-700 text-white'
-                                        : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
+                                    ? 'bg-primary-600 hover:bg-primary-700 text-white'
+                                    : 'bg-gray-100 hover:bg-gray-200 text-gray-900'
                                     }`}>
                                     Tư vấn ngay
                                     <ArrowRight className="w-4 h-4" />
@@ -252,7 +249,6 @@ export default function WindPowerPage() {
                 </Container>
             </Section>
 
-            <Footer />
         </div>
     );
 }

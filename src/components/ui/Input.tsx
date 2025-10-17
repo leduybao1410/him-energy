@@ -1,30 +1,67 @@
-import { InputHTMLAttributes, forwardRef } from 'react';
+'use client';
+import { InputHTMLAttributes, forwardRef, useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     label?: string;
     error?: string;
-    className?: string;
+    containerClassName?: string;
+    textClassName?: string;
+    labelClassName?: string;
+    isCurrency?: boolean;
+    currencySymbol?: string;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-    ({ label, error, className = '', ...props }, ref) => {
+    ({
+        label,
+        error,
+        containerClassName = '',
+        textClassName = '',
+        labelClassName = '',
+        isCurrency = false,
+        currencySymbol = 'đ',
+        value,
+        onChange,
+        ...props
+    }, ref) => {
+        const [displayValue, setDisplayValue] = useState('');
+
+        useEffect(() => {
+            if (props.type === 'number' || isCurrency) {
+                setDisplayValue(Number(value).toLocaleString());
+            } else {
+                setDisplayValue(String(value || ''));
+            }
+        }, [value]);
+
         return (
-            <div className="w-full">
+            <div className={cn('w-full', containerClassName)}>
                 {label && (
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className={cn('block text-sm font-medium text-gray-700 mb-2', labelClassName)}>
                         {label}
                     </label>
                 )}
-                <input
-                    ref={ref}
-                    className={cn(
-                        'w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200',
-                        error && 'border-red-500 focus:ring-red-500',
-                        className
+                <div className="relative">
+                    {isCurrency && (
+                        <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none">
+                            {currencySymbol}
+                        </div>
                     )}
-                    {...props}
-                />
+                    <input
+                        ref={ref}
+                        className={cn(
+                            'w-full py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200',
+                            isCurrency ? 'pl-8 pr-4' : 'px-4',
+                            error && 'border-red-500 focus:ring-red-500 ',
+                            textClassName,
+                        )}
+                        value={value}
+                        onChange={onChange}
+                        {...props}
+                    />
+                </div>
+                {isCurrency && <p className="text-black mt-2 ">Số tiền: {displayValue} {currencySymbol}</p>}
                 {error && (
                     <p className="mt-1 text-sm text-red-600">{error}</p>
                 )}

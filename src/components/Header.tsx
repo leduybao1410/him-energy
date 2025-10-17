@@ -53,6 +53,7 @@ const Header = () => {
         { name: t('solutions.consulting'), icon: Leaf, href: '/services/consulting' },
     ];
 
+
     // Xác định style của header
     const getHeaderClasses = () => {
         if (headerStyle === 'fixed') {
@@ -64,7 +65,9 @@ const Header = () => {
         // Auto mode - thay đổi dựa trên scroll
         return isScrolled
             ? 'bg-white/98 backdrop-blur-xl shadow-2xl border-b border-emerald-200/50'
-            : 'bg-gradient-to-r from-white/20 via-white/10 to-white/20 backdrop-blur-lg border-b border-white/20';
+            :
+            'bg-transparent';
+        //  'bg-gradient-to-r from-white/20 via-white/10 to-white/20 backdrop-blur-lg border-b border-white/20';
     };
 
     const getTextClasses = (isScrolled: boolean) => {
@@ -90,13 +93,14 @@ const Header = () => {
 
     return (
         <header
-            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${getHeaderClasses()}`}
+
+            className={`fixed top-0 left-0 right-0 z-50 transition-all  duration-500 ${getHeaderClasses()}`}
         >
             <div className="container mx-auto px-4">
                 <div className="flex justify-between items-center h-20">
                     {/* Logo */}
                     <Link href="/" className="flex items-center space-x-3">
-                        <div className="relative">
+                        {/* <div className="relative">
                             <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-xl flex items-center justify-center shadow-lg">
                                 <Sun className="w-6 h-6 text-white" />
                             </div>
@@ -104,8 +108,9 @@ const Header = () => {
                         </div>
                         <div>
                             <h1 className={`text-2xl font-bold transition-colors duration-500 ${textClasses.title}`}>Him Energy</h1>
-                            <p className={`text-xs font-medium transition-colors duration-500 ${textClasses.subtitle}`}>{t('navigation.greenEnergy')}</p>
-                        </div>
+                            <p className={`text-xs font-medium transition-colors duration-500 ${textClasses.subtitle}`}>{t('navigation.greenEnergy')}</p> 
+                        </div>*/}
+                        <img src="/energy_logo_rectangle.png" alt="Him Energy" width={130} height={100} className='rounded-lg' />
                     </Link>
 
                     {/* Desktop Navigation */}
@@ -213,11 +218,9 @@ const Header = () => {
                                     </div>
                                 ))}
                                 <div className="pt-4 border-t border-gray-200 space-y-4">
-                                    <div className="px-4">
-                                        <LanguageSwitcher />
-                                    </div>
+                                    <LanguageSwitcher />
                                     <button
-                                        className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-300"
+                                        className="w-full bg-primary-600 hover:bg-primary-700 text-white  font-semibold py-3 px-6 rounded-lg transition-colors duration-300"
                                         onClick={() => setIsMenuOpen(false)}
                                     >
                                         {t('navigation.getQuote')}
