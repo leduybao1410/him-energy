@@ -61,7 +61,7 @@ export async function POST(request: Request) {
         }
 
         // Construct the URL with query parameters if provided
-        let wpCreateUrl = serverImagesRoute.create.url;
+        const wpCreateUrl = serverImagesRoute.create.url;
         const wpUrl = new URL(wpCreateUrl);
 
 
