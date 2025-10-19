@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Menu, X, Sun, Wind, Leaf, ChevronDown } from 'lucide-react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import LanguageSwitcher from './LanguageSwitcher';
 
 const Header = () => {
@@ -13,6 +13,8 @@ const Header = () => {
     const t = useTranslations('common');
 
     useEffect(() => {
+        if (typeof window === 'undefined') return;
+
         const handleScroll = () => {
             setIsScrolled(window.scrollY > 50);
         };
@@ -22,6 +24,8 @@ const Header = () => {
 
     // Load header style preference from localStorage
     useEffect(() => {
+        if (typeof window === 'undefined') return;
+
         const savedStyle = localStorage.getItem('headerStyle') as 'auto' | 'fixed' | 'gradient';
         if (savedStyle && ['auto', 'fixed', 'gradient'].includes(savedStyle)) {
             setHeaderStyle(savedStyle);
@@ -30,6 +34,8 @@ const Header = () => {
 
     // Save header style preference to localStorage
     useEffect(() => {
+        if (typeof window === 'undefined') return;
+
         localStorage.setItem('headerStyle', headerStyle);
     }, [headerStyle]);
 
@@ -43,7 +49,7 @@ const Header = () => {
         { name: t('navigation.products'), href: '/products', isExternal: false },
         // { name: t('navigation.solutions'), href: '#solutions', hasDropdown: true },
         { name: t('navigation.about'), href: '/about', isExternal: false },
-        { name: t('navigation.projects'), href: '/projects', isExternal: false },
+        // { name: t('navigation.projects'), href: '/projects', isExternal: false },
         { name: t('navigation.contact'), href: '/contact', isExternal: false },
     ];
 
@@ -83,13 +89,20 @@ const Header = () => {
         return {
             title: isScrolled ? 'text-gray-900 drop-shadow-sm' : 'text-white drop-shadow-lg',
             subtitle: isScrolled ? 'text-primary-600' : 'text-white/90',
-            nav: isScrolled ? 'text-gray-700 hover:text-primary-600 hover:bg-primary-50 shadow-sm' : 'text-white hover:text-primary-300 hover:bg-white/20 drop-shadow-lg',
+            nav: isScrolled ? 'text-gray-700 hover:text-primary-600 hover:bg-primary-50 shadow-none ' : ' text-white  hover:text-primary-300 hover:bg-white/20 drop-shadow-lg hover:drop-shadow-xl',
             button: isScrolled ? 'text-gray-700 hover:bg-gray-100 shadow-sm' : 'text-white hover:bg-white/20 drop-shadow-lg',
             cta: isScrolled ? 'bg-primary-600 hover:bg-primary-700 text-white shadow-lg shadow-primary-500/25' : 'bg-white/30 hover:bg-white/40 text-white border border-white/40 backdrop-blur-sm drop-shadow-lg'
         };
     };
 
     const textClasses = getTextClasses(isScrolled);
+    const currentLocale = useLocale();
+
+    const isActive = (href: string) => {
+        if (typeof window === 'undefined') return false;
+        const currentPath = window.location.pathname;
+        return currentPath === `/${currentLocale}${href === '/' ? '' : href}`;
+    };
 
     return (
         <header
@@ -114,20 +127,21 @@ const Header = () => {
                     </Link>
 
                     {/* Desktop Navigation */}
-                    <nav className="hidden lg:flex items-center gap-2">
+                    <nav className="hidden lg:flex items-center gap-3">
                         {navigationItems.map((item) => (
                             <div key={item.name} className="relative group">
                                 {item.isExternal === false ? (
                                     <Link
                                         href={item.href}
-                                        className={`flex flex-nowrap items-center space-x-1 p-2 rounded-lg transition-all duration-500 ${textClasses.nav}`}
+                                        data-active={isActive(item.href)}
+                                        className={`flex flex-nowrap items-center space-x-1 p-2 rounded-lg transition-all duration-500 ${textClasses.nav} data-[active=true]:text-primary-600 `}
                                     >
                                         <span className="whitespace-nowrap">{item.name}</span>
                                     </Link>
                                 ) : (
                                     <a
                                         href={item.href}
-                                        className={`flex items-center space-x-1 px-4 py-2 rounded-lg transition-all duration-500 ${textClasses.nav}`}
+                                        className={`flex items-center space-x-1 px-4 py-2 rounded-lg transition-all duration-500 ${textClasses.nav} data-[active=true]:text-primary-600 `}
                                     >
                                         <span>{item.name}</span>
                                     </a>

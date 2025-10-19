@@ -2,16 +2,18 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui';
-import { X, Upload, Search, Image as ImageIcon, Trash2, Check } from 'lucide-react';
+import { X, Upload, Search, Image as ImageIcon, Trash2, Check, FileText } from 'lucide-react';
 import { ClientImagesRoute } from '@/constants/client-route/client-images-route';
+import { ClientFilesRoute } from '@/constants/client-route/client-files-route';
 
-interface ImageItem {
+interface FileItem {
     id: number;
     source_url: string;
     title: {
         rendered: string;
     };
     alt_text: string;
+    mime_type: string;
     media_details?: {
         width: number;
         height: number;
@@ -22,61 +24,85 @@ interface ImageItem {
 interface ImageGalleryProps {
     isOpen: boolean;
     onClose: () => void;
-    onSelect: (imageUrl: string) => void;
-    selectedImageUrl?: string;
+    onSelect: (fileUrl: string) => void;
+    onMultipleSelect?: (fileUrls: string[]) => void;
+    selectedFileUrl?: string;
+    selectedImageUrls?: string[];
     title?: string;
+    allowedTypes?: ('image' | 'pdf')[];
+    multiple?: boolean;
+    maxSelection?: number;
 }
 
 export default function ImageGallery({
     isOpen,
     onClose,
     onSelect,
-    selectedImageUrl,
-    title = "Chọn hình ảnh"
+    onMultipleSelect,
+    selectedFileUrl,
+    selectedImageUrls = [],
+    title = "Chọn file",
+    allowedTypes = ['image', 'pdf'],
+    multiple = false,
+    maxSelection = 1
 }: ImageGalleryProps) {
-    const [images, setImages] = useState<ImageItem[]>([]);
+    const [files, setFiles] = useState<FileItem[]>([]);
     const [loading, setLoading] = useState(false);
     const [uploading, setUploading] = useState(false);
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [error, setError] = useState<string | null>(null);
+    const [activeTab, setActiveTab] = useState<'image' | 'pdf'>('image');
+    const [selectedUrls, setSelectedUrls] = useState<string[]>(selectedImageUrls || []);
     const fileInputRef = useRef<HTMLInputElement>(null);
 
-    // Fetch images from API
-    const fetchImages = async (page: number = 1, search: string = '') => {
+    // Sync selectedUrls with props when gallery opens
+    useEffect(() => {
+        if (isOpen && selectedImageUrls) {
+            setSelectedUrls(selectedImageUrls);
+        } else if (!isOpen) {
+            setSelectedUrls([]);
+        }
+    }, [isOpen]);
+
+
+    // Fetch files from API
+    const fetchFiles = async (page: number = 1, search: string = '', fileType: 'image' | 'pdf' = 'image') => {
         try {
             setLoading(true);
             setError(null);
 
             const params = new URLSearchParams({
                 per_page: '20',
-                page: page.toString()
+                page: page.toString(),
+                type: fileType
             });
 
             if (search) {
                 params.append('search', search);
             }
 
-            const response = await fetch(`${ClientImagesRoute.list.url}?${params}`);
+            const response = await fetch(`${ClientFilesRoute.list.url}?${params}`);
             const data = await response.json();
 
             if (response.ok) {
-                setImages(data.data || []);
+                setFiles(data.data || []);
+                console.log(data.data.map((file: FileItem) => file.source_url));
                 setTotalPages(parseInt(data.totalPages) || 1);
                 setCurrentPage(page);
             } else {
-                setError(data.error || 'Không thể tải danh sách hình ảnh');
+                setError(data.error || 'Không thể tải danh sách file');
             }
         } catch (error) {
-            console.error('Error fetching images:', error);
-            setError('Lỗi kết nối khi tải hình ảnh');
+            console.error('Error fetching files:', error);
+            setError('Lỗi kết nối khi tải file');
         } finally {
             setLoading(false);
         }
     };
 
-    // Upload new image
+    // Upload new file
     const handleUpload = async (file: File) => {
         try {
             setUploading(true);
@@ -86,23 +112,23 @@ export default function ImageGallery({
             formData.append('file', file);
             formData.append('title', file.name);
 
-            const response = await fetch(ClientImagesRoute.create.url, {
-                method: ClientImagesRoute.create.method,
+            const response = await fetch(ClientFilesRoute.create.url, {
+                method: ClientFilesRoute.create.method,
                 body: formData,
             });
 
             const data = await response.json();
 
             if (response.ok) {
-                // Refresh the image list
-                await fetchImages(1, searchTerm);
+                // Refresh the file list
+                await fetchFiles(1, searchTerm, activeTab);
                 setError(null);
             } else {
-                setError(data.error || 'Không thể tải lên hình ảnh');
+                setError(data.error || 'Không thể tải lên file');
             }
         } catch (error) {
-            console.error('Error uploading image:', error);
-            setError('Lỗi kết nối khi tải lên hình ảnh');
+            console.error('Error uploading file:', error);
+            setError('Lỗi kết nối khi tải lên file');
         } finally {
             setUploading(false);
         }
@@ -112,9 +138,13 @@ export default function ImageGallery({
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
         if (file) {
-            // Validate file type
-            if (!file.type.startsWith('image/')) {
+            // Validate file type based on active tab
+            if (activeTab === 'image' && !file.type.startsWith('image/')) {
                 setError('Vui lòng chọn file hình ảnh hợp lệ');
+                return;
+            }
+            if (activeTab === 'pdf' && file.type !== 'application/pdf') {
+                setError('Vui lòng chọn file PDF hợp lệ');
                 return;
             }
 
@@ -128,40 +158,46 @@ export default function ImageGallery({
         }
     };
 
-    // Delete image
-    const handleDelete = async (imageId: number) => {
-        if (!confirm('Bạn có chắc chắn muốn xóa hình ảnh này?')) {
+    // Delete file
+    const handleDelete = async (fileId: number) => {
+        if (!confirm('Bạn có chắc chắn muốn xóa file này?')) {
             return;
         }
 
         try {
-            const response = await fetch(ClientImagesRoute.delete.url(imageId.toString()), {
-                method: ClientImagesRoute.delete.method,
+            const response = await fetch(ClientFilesRoute.delete.url(fileId.toString()), {
+                method: ClientFilesRoute.delete.method,
             });
 
             if (response.ok) {
-                // Refresh the image list
-                await fetchImages(currentPage, searchTerm);
+                // Refresh the file list
+                await fetchFiles(currentPage, searchTerm, activeTab);
             } else {
                 const data = await response.json();
-                setError(data.error || 'Không thể xóa hình ảnh');
+                setError(data.error || 'Không thể xóa file');
             }
         } catch (error) {
-            console.error('Error deleting image:', error);
-            setError('Lỗi kết nối khi xóa hình ảnh');
+            console.error('Error deleting file:', error);
+            setError('Lỗi kết nối khi xóa file');
         }
     };
 
     // Handle search
     const handleSearch = (e: React.FormEvent) => {
         e.preventDefault();
-        fetchImages(1, searchTerm);
+        fetchFiles(1, searchTerm, activeTab);
     };
 
-    // Load images when component opens
+    // Handle tab change
+    const handleTabChange = (tab: 'image' | 'pdf') => {
+        setActiveTab(tab);
+        fetchFiles(1, searchTerm, tab);
+    };
+
+    // Load files when component opens
     useEffect(() => {
         if (isOpen) {
-            fetchImages(1, searchTerm);
+            fetchFiles(1, searchTerm, activeTab);
         }
     }, [isOpen]);
 
@@ -193,7 +229,7 @@ export default function ImageGallery({
 
     return (
         <div
-            className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+            className="fixed inset-0 bg-black/50 flex items-center justify-center z-[999] p-4"
             onClick={handleBackdropClick}
         >
             <div
@@ -212,13 +248,49 @@ export default function ImageGallery({
                     </Button>
                 </div>
 
+                {/* Tabs */}
+                <div className="border-b px-4">
+                    <div className="flex">
+                        {allowedTypes.includes('image') && (
+                            <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleTabChange('image')}
+                                className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${activeTab === 'image'
+                                    ? 'border-primary-600 text-primary-600'
+                                    : 'border-transparent text-gray-500 hover:text-primary-600 hover:border-primary-600'
+                                    }`}
+                            >
+                                <ImageIcon className="w-4 h-4 inline mr-2" />
+                                Hình ảnh
+                            </Button>
+                        )}
+                        {allowedTypes.includes('pdf') && (
+                            <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                onClick={() => handleTabChange('pdf')}
+                                className={`px-6 py-3 text-sm font-medium border-b-2 transition-colors ${activeTab === 'pdf'
+                                    ? 'border-primary-600 text-primary-600'
+                                    : 'border-transparent text-gray-500 hover:text-primary-600 hover:border-primary-600'
+                                    }`}
+                            >
+                                <FileText className="w-4 h-4 inline mr-2" />
+                                PDF Files
+                            </Button>
+                        )}
+                    </div>
+                </div>
+
                 {/* Upload Section */}
                 <div className="p-6 border-b bg-gray-50">
                     <div className="flex items-center gap-4">
                         <input
                             ref={fileInputRef}
                             type="file"
-                            accept="image/*"
+                            accept={activeTab === 'image' ? 'image/*' : 'application/pdf'}
                             onChange={handleFileChange}
                             className="hidden"
                         />
@@ -228,7 +300,7 @@ export default function ImageGallery({
                             className="flex items-center gap-2"
                         >
                             <Upload className="w-4 h-4" />
-                            {uploading ? 'Đang tải lên...' : 'Tải lên hình ảnh'}
+                            {uploading ? 'Đang tải lên...' : `Tải lên ${activeTab === 'image' ? 'hình ảnh' : 'PDF'}`}
                         </Button>
 
                         {/* Search */}
@@ -238,7 +310,7 @@ export default function ImageGallery({
                                     type="text"
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    placeholder="Tìm kiếm hình ảnh..."
+                                    placeholder={`Tìm kiếm ${activeTab === 'image' ? 'hình ảnh' : 'PDF'}...`}
                                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                                 />
                                 <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
@@ -253,38 +325,82 @@ export default function ImageGallery({
                     )}
                 </div>
 
-                {/* Image Grid */}
+                {/* File Grid */}
                 <div className="flex-1 overflow-auto p-6">
                     {loading ? (
                         <div className="flex items-center justify-center h-64">
                             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
                         </div>
-                    ) : images.length === 0 ? (
+                    ) : files.length === 0 ? (
                         <div className="flex flex-col items-center justify-center h-64 text-gray-500">
-                            <ImageIcon className="w-12 h-12 mb-4" />
-                            <p>Không tìm thấy hình ảnh nào</p>
+                            {activeTab === 'image' ? (
+                                <ImageIcon className="w-12 h-12 mb-4" />
+                            ) : (
+                                <FileText className="w-12 h-12 mb-4" />
+                            )}
+                            <p>Không tìm thấy {activeTab === 'image' ? 'hình ảnh' : 'PDF'} nào</p>
                         </div>
                     ) : (
                         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                            {images.map((image) => (
+                            {files.map((file) => (
                                 <div
-                                    key={image.id}
-                                    className={`relative group cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${selectedImageUrl === image.source_url
-                                        ? 'border-primary ring-2 ring-primary/20'
-                                        : 'border-gray-200 hover:border-gray-300'
+                                    key={file.id}
+                                    className={`relative group cursor-pointer rounded-lg overflow-hidden border-2 transition-all ${multiple
+                                        ? (selectedUrls.includes(file.source_url)
+                                            ? 'border-primary ring-2 ring-primary/20'
+                                            : 'border-gray-200 hover:border-gray-300')
+                                        : (selectedFileUrl === file.source_url
+                                            ? 'border-primary ring-2 ring-primary/20'
+                                            : 'border-gray-200 hover:border-gray-300')
                                         }`}
-                                    onClick={() => onSelect(image.source_url)}
+                                    onClick={() => {
+                                        if (multiple) {
+                                            if (selectedUrls.includes(file.source_url)) {
+                                                // Remove from selection
+                                                const newSelection = selectedUrls.filter(url => url !== file.source_url);
+                                                setSelectedUrls(newSelection);
+                                            } else if (selectedUrls.length < maxSelection) {
+                                                // Add to selection
+                                                const newSelection = [...selectedUrls, file.source_url];
+                                                setSelectedUrls(newSelection);
+                                            }
+                                        } else {
+                                            onSelect(file.source_url);
+                                        }
+                                    }}
                                 >
-                                    <img
-                                        src={image.source_url}
-                                        alt={image.alt_text || image.title.rendered}
-                                        className="w-full h-32 object-cover"
-                                        loading="lazy"
-                                    />
+                                    {activeTab === 'image' ? (
+                                        <div className="w-full h-32 bg-gray-100 flex items-center justify-center">
+                                            <img
+                                                src={file.source_url}
+                                                alt={file.alt_text || file.title.rendered}
+                                                className="w-full h-full object-cover"
+                                                onLoad={() => console.log('Image loaded successfully:', file.source_url)}
+                                                onError={(e) => {
+                                                    console.error('Image load error:', file.source_url);
+                                                    const target = e.target as HTMLImageElement;
+                                                    target.style.display = 'none';
+                                                    // Show error placeholder
+                                                    const parent = target.parentElement;
+                                                    if (parent) {
+                                                        parent.innerHTML = `
+                                                            <div class="w-full h-full bg-gray-200 flex items-center justify-center">
+                                                                <span class="text-gray-500 text-xs">Image Error</span>
+                                                            </div>
+                                                        `;
+                                                    }
+                                                }}
+                                            />
+                                        </div>
+                                    ) : (
+                                        <div className="w-full h-32 bg-gray-100 flex items-center justify-center">
+                                            <FileText className="w-12 h-12 text-gray-400" />
+                                        </div>
+                                    )}
 
                                     {/* Selection indicator */}
-                                    {selectedImageUrl === image.source_url && (
-                                        <div className="absolute top-2 right-2 bg-primary text-white rounded-full p-1">
+                                    {(multiple ? selectedUrls.includes(file.source_url) : selectedFileUrl === file.source_url) && (
+                                        <div className="absolute top-2 right-2 bg-primary text-white bg-black/30 rounded-full p-1">
                                             <Check className="w-3 h-3" />
                                         </div>
                                     )}
@@ -294,19 +410,22 @@ export default function ImageGallery({
                                         <Button
                                             variant="outline"
                                             size="sm"
-                                            onClick={() => handleDelete(image.id)}
+                                            onClick={() => handleDelete(file.id)}
                                         >
                                             <Trash2 className="w-4 h-4" />
                                         </Button>
                                     </div>
 
-                                    {/* Image info */}
+                                    {/* File info */}
                                     <div className="absolute bottom-0 left-0 right-0 bg-black/70 text-white p-2 text-xs">
-                                        <p className="truncate">{image.title.rendered}</p>
-                                        {image.media_details && (
+                                        <p className="truncate">{file.title.rendered}</p>
+                                        {file.media_details && activeTab === 'image' && (
                                             <p className="text-gray-300">
-                                                {image.media_details.width} × {image.media_details.height}
+                                                {file.media_details.width} × {file.media_details.height}
                                             </p>
+                                        )}
+                                        {activeTab === 'pdf' && (
+                                            <p className="text-gray-300">PDF Document</p>
                                         )}
                                     </div>
                                 </div>
@@ -320,7 +439,7 @@ export default function ImageGallery({
                     <div className="flex items-center justify-between p-6 border-t">
                         <Button
                             variant="outline"
-                            onClick={() => fetchImages(currentPage - 1, searchTerm)}
+                            onClick={() => fetchFiles(currentPage - 1, searchTerm, activeTab)}
                             disabled={currentPage === 1 || loading}
                         >
                             Trước
@@ -330,7 +449,7 @@ export default function ImageGallery({
                         </span>
                         <Button
                             variant="outline"
-                            onClick={() => fetchImages(currentPage + 1, searchTerm)}
+                            onClick={() => fetchFiles(currentPage + 1, searchTerm, activeTab)}
                             disabled={currentPage === totalPages || loading}
                         >
                             Sau
@@ -339,24 +458,41 @@ export default function ImageGallery({
                 )}
 
                 {/* Footer */}
-                <div className="flex items-center justify-end gap-4 p-6 border-t">
-                    <Button
-                        variant="outline"
-                        className="text-black/50 border-black/50 hover:bg-black/10"
-                        onClick={onClose}>
-                        Hủy
-                    </Button>
-                    <Button
-                        onClick={() => {
-                            if (selectedImageUrl) {
-                                onSelect(selectedImageUrl);
+                <div className="flex items-center justify-between p-6 border-t">
+                    {multiple && (
+                        <div className="text-sm text-gray-600">
+                            Đã chọn {selectedUrls.length}/{maxSelection} hình ảnh
+                        </div>
+                    )}
+                    <div className="flex items-center gap-4">
+                        <Button
+                            variant="outline"
+                            className="text-black/50 border-black/50 hover:bg-black/10"
+                            onClick={onClose}>
+                            Hủy
+                        </Button>
+                        <Button
+                            onClick={() => {
+                                if (multiple) {
+                                    // For multiple selection, use onMultipleSelect if available
+                                    if (onMultipleSelect) {
+                                        onMultipleSelect(selectedUrls);
+                                    } else {
+                                        // Fallback: call onSelect for each selected URL
+                                        selectedUrls.forEach(url => onSelect(url));
+                                    }
+                                } else {
+                                    if (selectedFileUrl) {
+                                        onSelect(selectedFileUrl);
+                                    }
+                                }
                                 onClose();
-                            }
-                        }}
-                        disabled={!selectedImageUrl}
-                    >
-                        Chọn
-                    </Button>
+                            }}
+                            disabled={multiple ? selectedUrls.length === 0 : !selectedFileUrl}
+                        >
+                            {multiple ? `Chọn ${selectedUrls.length} hình` : 'Chọn'}
+                        </Button>
+                    </div>
                 </div>
             </div>
         </div>

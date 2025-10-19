@@ -5,6 +5,14 @@ export const ClientProductsRoute = {
         url: '/api/products',
         method: Method.GET,
     },
+    get: {
+        url: (id: string) => `/api/products/${id}`,
+        method: Method.GET,
+    },
+    related: {
+        url: (id: string) => `/api/products/${id}/related`,
+        method: Method.GET,
+    },
     create: {
         url: '/api/products',
         method: Method.POST,

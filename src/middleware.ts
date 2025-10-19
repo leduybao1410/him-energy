@@ -1,7 +1,9 @@
 import createMiddleware from 'next-intl/middleware';
 import { NextRequest, NextResponse } from 'next/server';
 import { CONTENT_TYPE_APPLICATION_JSON } from './lib/utils';
-import { authRoute } from './constants/server-route/server-auth-route';
+import { ClientRouteMap } from './constants/client-route/client-route-map';
+import { serverAuthRoute } from './constants/server-route/server-auth-route';
+import { setAuthorizationHeader } from './lib/api/apiFetch';
 
 // Create the internationalization middleware
 const intlMiddleware = createMiddleware({
@@ -15,29 +17,41 @@ const intlMiddleware = createMiddleware({
   localePrefix: 'always'
 });
 
-export default function middleware(request: NextRequest) {
+export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  console.log(pathname)
+
   // Check if the path is an admin route
-  const isAdminRoute = pathname.includes('/admin/') || pathname.includes('/dashboard');
+  const isAdminRoute = pathname.includes('/admin') || pathname.includes('/dashboard');
 
   if (isAdminRoute) {
     // Check for ACCESS_TOKEN cookie
     const accessToken = request.cookies.get('ACCESS_TOKEN')?.value;
-    fetch(authRoute.validateToken.url, {
-      method: authRoute.validateToken.method,
-      headers: {
-        ...CONTENT_TYPE_APPLICATION_JSON
-      },
-      body: JSON.stringify({ token: accessToken })
-    }).then(response => response.json()).then(data => {
-      if (!data.isValid) {
+
+    if (!accessToken) {
+      return NextResponse.redirect(new URL('/login', request.url));
+    }
+
+    try {
+      const response = await fetch(serverAuthRoute.validateToken.url, {
+        method: serverAuthRoute.validateToken.method,
+        headers: {
+          ...setAuthorizationHeader(request),
+          ...CONTENT_TYPE_APPLICATION_JSON
+        },
+        body: JSON.stringify({ token: accessToken })
+      });
+
+      const resJSON = await response.json();
+
+      if (resJSON?.data?.status !== 200) {
         return NextResponse.redirect(new URL('/login', request.url));
       }
-    }).catch(error => {
+    } catch (error) {
       console.error('Error validating token:', error);
       return NextResponse.redirect(new URL('/login', request.url));
-    });
+    }
   }
 
   // Apply internationalization middleware for all other routes

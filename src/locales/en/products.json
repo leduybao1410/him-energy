@@ -45,7 +45,8 @@
         "gallery": "Gallery",
         "reviews": "Reviews",
         "warranty": "Warranty",
-        "delivery": "Delivery"
+        "delivery": "Delivery",
+        "downloadPdf": "Download PDF"
     },
     "categories": {
         "solar": {

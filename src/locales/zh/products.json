@@ -45,7 +45,8 @@
         "gallery": "图库",
         "reviews": "评价",
         "warranty": "保修",
-        "delivery": "配送"
+        "delivery": "配送",
+        "downloadPdf": "下载PDF"
     },
     "categories": {
         "solar": {

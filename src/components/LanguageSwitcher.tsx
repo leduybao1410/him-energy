@@ -13,8 +13,9 @@ const LanguageSwitcher = () => {
     // Xóa locale cũ khỏi pathname (đảm bảo chỉ xóa ở đầu path)
     const regex = new RegExp(`^/(${locales.join('|')})`);
     const pathWithoutLocale = pathname.replace(regex, '') || '/';
+    document.documentElement.lang = newLocale;
     // Điều hướng sang locale mới với path đã loại bỏ locale cũ
-    router.push(`/${newLocale}${pathWithoutLocale}`);
+    window.location.href = `/${newLocale}${pathWithoutLocale}`;
 
     setIsOpen(false);
   };

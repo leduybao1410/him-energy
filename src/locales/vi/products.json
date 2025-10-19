@@ -45,7 +45,8 @@
         "gallery": "Thư viện ảnh",
         "reviews": "Đánh giá",
         "warranty": "Bảo hành",
-        "delivery": "Giao hàng"
+        "delivery": "Giao hàng",
+        "downloadPdf": "Tải PDF"
     },
     "categories": {
         "solar": {

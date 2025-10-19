@@ -1,6 +1,6 @@
 import { HOST, Method, PREFIX_AUTH } from "../utils";
 
-export const authRoute = {
+export const serverAuthRoute = {
     login: {
         url: `${HOST}${PREFIX_AUTH}/token`,
         method: Method.POST,

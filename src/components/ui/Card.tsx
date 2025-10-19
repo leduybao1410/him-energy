@@ -16,7 +16,7 @@ const Card = ({
     padding = 'md',
     onClick
 }: CardProps) => {
-    const baseClasses = 'bg-white rounded-2xl shadow-lg transition-all duration-300';
+    const baseClasses = 'overflow-hidden bg-white rounded-2xl shadow-lg transition-all duration-300';
 
     const hoverClasses = hover ? 'hover:shadow-xl hover:-translate-y-2' : '';
 

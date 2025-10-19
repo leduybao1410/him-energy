@@ -5,4 +5,8 @@ export const authRoute = {
         url: '/api/auth/login',
         method: Method.POST,
     },
+    validateToken: {
+        url: '/api/auth/validate',
+        method: Method.POST,
+    },
 }

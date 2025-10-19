@@ -1,5 +1,5 @@
 import { Sun, Wind, Leaf, CheckCircle } from 'lucide-react';
-import { Section, Container } from '@/components/ui';
+import { Section, Container, AnimationText } from '@/components/ui';
 
 const ServicesSection = () => {
     const servicesData = [
@@ -42,13 +42,25 @@ const ServicesSection = () => {
         <Section id="solutions" background="white">
             <Container maxWidth="6xl">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                        Giải pháp <span className="text-primary-600">Năng lượng</span>
-                    </h2>
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                    <AnimationText
+                        animation="slideInDown"
+                        timing="slow"
+                        delay="medium"
+                        trigger="onScroll"
+                        className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                        Giải pháp <span className="text-primary-600 animate-pulse">Năng lượng</span>
+                    </AnimationText>
+                    <AnimationText
+                        animation="slideInDown"
+                        timing="slow"
+                        delay="medium"
+                        trigger="onScroll"
+                        className="text-xl text-gray-600 max-w-3xl mx-auto"
+                        as="p"
+                    >
                         Cung cấp đa dạng các giải pháp năng lượng tái tạo phù hợp với mọi nhu cầu
                         từ hộ gia đình đến doanh nghiệp lớn.
-                    </p>
+                    </AnimationText>
                 </div>
 
                 <div className="grid md:grid-cols-3 gap-8">

@@ -1,5 +1,6 @@
+'use client';
 import { Globe, Zap, Users } from 'lucide-react';
-import { Section, Container, IconCard } from '@/components/ui';
+import { Section, Container, IconCard, AnimationText } from '@/components/ui';
 
 const AboutSection = () => {
     const aboutData = [
@@ -23,18 +24,32 @@ const AboutSection = () => {
         }
     ];
 
+
+
     return (
         <Section id="about" background="secondary">
             <Container maxWidth="6xl">
-                <div className="flex flex-col items-center justify-center">
-                    <div className="max-w-4xl mx-auto text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                <div className="flex flex-col items-center justify-center py-4">
+                    <div className="max-w-4xl mx-auto text-center gap-4 mb-16">
+                        <AnimationText
+                            animation="slideInDown"
+                            timing="slow"
+                            delay="medium"
+                            trigger="onScroll"
+                            className=" font-bold text-white text-4xl md:text-5xl"
+                        >
                             Về <span className="text-primary-600">Him Energy</span>
-                        </h2>
-                        <p className="text-xl text-white/80 leading-relaxed">
+                        </AnimationText>
+                        <AnimationText
+                            animation="slideInDown"
+                            timing="slow"
+                            delay="medium"
+                            trigger="onScroll"
+                            className=" text-xl text-white/80 leading-relaxed"
+                        >
                             Chúng tôi là những chuyên gia hàng đầu trong lĩnh vực năng lượng tái tạo,
                             cam kết mang đến những giải pháp bền vững và hiệu quả cho tương lai xanh.
-                        </p>
+                        </AnimationText>
                     </div>
 
                     <div className="grid md:grid-cols-3 gap-8 w-full">

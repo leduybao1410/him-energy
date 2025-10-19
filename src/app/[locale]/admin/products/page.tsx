@@ -7,16 +7,32 @@ import Footer from "@/components/Footer";
 import { Button, Card } from '@/components/ui';
 import { Container, Section } from '@/components/ui';
 import { Product } from '@/types/product';
-import { Plus, Edit, Trash2, Eye, X } from 'lucide-react';
+import { Plus, Edit, Trash2, Eye, X, Ellipsis } from 'lucide-react';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { HeroSectionBackground } from '@/components/sections/HeroSection';
 import { cn } from '@/lib/utils';
 import ProductForm from '@/components/forms/ProductForm';
 import { ClientRouteMap } from '@/constants/client-route/client-route-map';
-import { apiFetch } from '@/lib/api/apiFetch';
+import { apiFetch, fetchProduct } from '@/lib/api/apiFetch';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { getCategoryLabel } from '@/components/sections/ProductDetailSection';
+import { useLocale, useTranslations } from 'next-intl';
+
 
 export default function AdminProductsPage() {
+    const urlParams = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams();
+    const langCode = urlParams.get('lang_code');
+    const isEditing = urlParams.get('isEditing');
+    const isCreating = urlParams.get('isCreating');
+    const id = urlParams.get('id');
+    const root_id = urlParams.get('root_id') ?? null;
+
     const router = useRouter();
+    const t = useTranslations();
+    const tCategories = useTranslations('products.categories');
+
+    const currentLangCode = window.location.pathname.split('/')[1] || 'vi';
+
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [showForm, setShowForm] = useState(false);
@@ -24,15 +40,15 @@ export default function AdminProductsPage() {
     const [error, setError] = useState<string | null>(null);
     const [actionLoading, setActionLoading] = useState(false);
 
-    useEffect(() => {
-        fetchProducts();
-    }, []);
+    const [formLangCode, setFormLangCode] = useState(langCode ?? currentLangCode);
 
-    const fetchProducts = async () => {
+
+
+    const fetchProducts = async (langCode: string) => {
         try {
             setLoading(true);
             setError(null);
-            const response = await fetch('/api/products');
+            const response = await fetch(`/api/products?lang_code=${langCode}`);
             const data = await response.json();
 
             if (response.ok && data.products && Array.isArray(data.products)) {
@@ -43,6 +59,7 @@ export default function AdminProductsPage() {
         } catch (error) {
             console.error('Error fetching products:', error);
             setError('Network error occurred while fetching products');
+            setLoading(false);
         } finally {
             setLoading(false);
         }
@@ -59,7 +76,7 @@ export default function AdminProductsPage() {
             if (editingProduct) {
                 console.log(productData);
                 // Update existing product
-                const route = ClientRouteMap.products.update.url(editingProduct.id.toString());
+                const route = ClientRouteMap.products.update.url(editingProduct.id?.toString() ?? '');
                 console.log(route);
                 response = await apiFetch(route, {
                     method: ClientRouteMap.products.update.method,
@@ -77,7 +94,7 @@ export default function AdminProductsPage() {
 
             if (response.ok) {
                 // Refresh products list
-                await fetchProducts();
+                await fetchProducts(langCode ?? currentLangCode);
                 // Reset form state
                 setShowForm(false);
                 setEditingProduct(null);
@@ -111,7 +128,7 @@ export default function AdminProductsPage() {
 
                 if (response.ok) {
                     // Refresh products list
-                    await fetchProducts();
+                    await fetchProducts(langCode ?? currentLangCode);
                 } else {
                     setError(data.error || 'Failed to delete product');
                 }
@@ -129,12 +146,23 @@ export default function AdminProductsPage() {
         setEditingProduct(null);
     };
 
-    const formatPrice = (price: number) => {
-        return new Intl.NumberFormat('vi-VN', {
-            style: 'currency',
-            currency: 'VND'
-        }).format(price);
-    };
+    useEffect(() => {
+        fetchProducts(langCode ?? currentLangCode);
+        if (isCreating && langCode) {
+            setShowForm(true);
+            setEditingProduct(null);
+            setFormLangCode(langCode);
+        }
+    }, []);
+
+    useEffect(() => {
+        if (products.length > 0) {
+            if (isEditing && id) {
+                setEditingProduct(products.find(product => product.id === parseInt(id)) ?? null);
+                setShowForm(true);
+            }
+        }
+    }, [products.length]);
 
 
     if (loading) {
@@ -187,72 +215,50 @@ export default function AdminProductsPage() {
                         )}
 
                         {/* Product Form */}
-                        <Card className={cn(" bg-white/10 backdrop-blur-md border border-white/20 shadow-xl transition-all duration-300", showForm ? "h-full opacity-100" : "h-0 opacity-0")}>
+                        <Card className={cn(" bg-white/10  backdrop-blur-md border border-white/20 shadow-xl transition-all duration-300", showForm ? "h-full opacity-100" : "h-0 opacity-0")}>
                             <ProductForm
                                 product={editingProduct}
                                 onSubmit={handleFormSubmit}
                                 onCancel={handleCancel}
                                 isEditing={!!editingProduct}
                                 loading={actionLoading}
+                                langCode={formLangCode}
+                                root_id={root_id}
                             />
                         </Card>
 
                         {/* Products List */}
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                             {products.map((product) => (
-                                <Card key={product.id} className="p-6 hover:shadow-lg transition-shadow">
-                                    <div className="flex justify-between items-start mb-4">
+                                <Card key={product.id} className="px-3 py-4 z-50 hover:shadow-lg transition-shadow relative">
+                                    <div className="flex justify-between items-start mb-4 gap-3">
+                                        <img src={product.thumbnail_url} width={100} height={100} className='border border-black/10 shadow rounded-lg' />
                                         <div className="flex-1">
                                             <h3 className="font-semibold text-primary mb-2 line-clamp-2">
                                                 {product.name}
                                             </h3>
                                             <p className="text-sm text-muted-foreground mb-2">
-                                                {product.category}
+                                                {getCategoryLabel(product.category, tCategories)}
                                             </p>
-                                            <p className="text-lg font-bold text-accent">
+                                            {/* <p className="text-lg font-bold text-accent">
                                                 {formatPrice(product.price)}
-                                            </p>
+                                            </p> */}
                                         </div>
+                                        <ProductDropdownMenu
+                                            product={product}
+                                            handleEdit={handleEdit}
+                                            handleDelete={handleDelete}
+                                            actionLoading={actionLoading}
+                                        />
                                     </div>
 
                                     <p className="text-sm text-muted-foreground mb-4 line-clamp-3">
-                                        {product.description}
+                                        {t('products.productDetail.description')}: {product.description}
                                     </p>
 
-                                    <div className="flex gap-2 z-50">
-                                        <Button
-                                            type='button'
-                                            variant="outline"
-                                            size="sm"
-                                            onClick={() => {
-                                                router.push(`/admin/products/${product.id}`);
-                                            }}
-                                            className="flex items-center gap-1 text-black"
-                                        >
-                                            <Eye className="w-4 h-4" />
-                                            Chi tiết
-                                        </Button>
-                                        <Button
-                                            variant="outline"
-                                            size="sm"
-                                            onClick={() => handleEdit(product)}
-                                            disabled={actionLoading}
-                                            className="flex items-center gap-1 text-black"
-                                        >
-                                            <Edit className="w-4 h-4" />
-                                            Sửa
-                                        </Button>
-                                        <Button
-                                            variant="outline"
-                                            size="sm"
-                                            onClick={() => handleDelete(product.id)}
-                                            disabled={actionLoading}
-                                            className="flex items-center gap-1 text-red-600 hover:text-red-700"
-                                        >
-                                            <Trash2 className="w-4 h-4" />
-                                            Xóa
-                                        </Button>
-                                    </div>
+
+
+
                                 </Card>
                             ))}
                         </div>
@@ -276,5 +282,61 @@ export default function AdminProductsPage() {
                 </HeroSectionBackground>
             </div>
         </ProtectedRoute>
+    );
+}
+
+
+function ProductDropdownMenu({
+    product,
+    handleEdit,
+    handleDelete,
+    actionLoading,
+}: {
+    product: Product;
+    handleEdit: (product: Product) => void;
+    handleDelete: (productId: number) => void;
+    actionLoading: boolean;
+}) {
+    const [open, setOpen] = useState(false);
+    const router = useRouter();
+    const handleOpenDropdown = () => {
+        setOpen(!open);
+    };
+
+    return (
+        <DropdownMenu open={open} modal={true} onOpenChange={handleOpenDropdown}>
+            <DropdownMenuTrigger
+                className="rounded-full border p-1 w-8 h-8 flex items-center justify-center hover:bg-black/10 cursor-pointer outline-none"
+                aria-label="Mở menu thao tác"
+            >
+                <Ellipsis className="w-4 h-4 text-muted-foreground" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-40 bg-black/80 shadow-md rounded-md" align="end" side="bottom">
+                <DropdownMenuItem
+                    onClick={() => router.push(`/admin/products/${product.id}`)}
+                    disabled={actionLoading}
+                    className="flex items-center gap-2 hover:bg-gray-50 text-white hover:text-black "
+                >
+                    <Eye className="w-4 h-4" />
+                    <span>Xem</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                    onClick={() => handleEdit(product)}
+                    disabled={actionLoading}
+                    className="flex items-center gap-2 hover:bg-gray-50 text-white hover:text-black "
+                >
+                    <Edit className="w-4 h-4" />
+                    <span>Chỉnh sửa</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                    onClick={() => handleDelete(product.id ?? -1)}
+                    disabled={actionLoading}
+                    className="flex items-center gap-2 text-red-600 focus:text-red-700 hover:bg-red-50"
+                >
+                    <Trash2 className="w-4 h-4" />
+                    <span>Xóa sản phẩm</span>
+                </DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>
     );
 }

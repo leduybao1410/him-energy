@@ -61,7 +61,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                         {...props}
                     />
                 </div>
-                {isCurrency && <p className="text-black mt-2 ">Số tiền: {displayValue} {currencySymbol}</p>}
+                {isCurrency && <p className={`mt-2 ${textClassName}`}>Số tiền: {displayValue} {currencySymbol}</p>}
                 {error && (
                     <p className="mt-1 text-sm text-red-600">{error}</p>
                 )}

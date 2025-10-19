@@ -8,8 +8,21 @@ export async function GET(request: Request) {
         const { searchParams } = new URL(request.url);
         const page = Number(searchParams.get('page')) || 1;
         const per_page = Number(searchParams.get('per_page')) || 12;
+        const lang_code = searchParams.get('lang_code') || 'VI'; // Default to Vietnamese
+        const category = searchParams.get('category');
 
-        const apiUrl = `${serverRouteMap.products.list.url}?page=${page}&per_page=${per_page}`;
+        // Build query parameters
+        const queryParams = new URLSearchParams({
+            page: page.toString(),
+            per_page: per_page.toString(),
+            lang_code: lang_code
+        });
+
+        if (category) {
+            queryParams.append('category', category);
+        }
+
+        const apiUrl = `${serverRouteMap.products.list.url}?${queryParams.toString()}`;
         const res = await fetch(apiUrl, {
             method: serverRouteMap.products.list.method,
         });
@@ -74,8 +87,9 @@ export async function POST(request: Request) {
         });
 
         if (!response.ok) {
+            const errorData = await response.json();
             return NextResponse.json(
-                { error: 'Failed to create product' },
+                { error: 'Failed to create product', details: errorData },
                 { status: response.status }
             );
         }

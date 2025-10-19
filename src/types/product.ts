@@ -1,5 +1,11 @@
+type PdfType = {
+    url: string;
+    title: string;
+}
+
 export interface Product {
-    id: number;
+    id?: number;
+    root_id?: number;
     name: string;
     slug: string;
     description: string;
@@ -8,6 +14,9 @@ export interface Product {
     features: string[];
     image_url: string[];
     thumbnail_url: string;
+    pdf_file?: PdfType;
+    pdf_url?: string;
+    pdf_title?: string;
     created_at?: string;
     updated_at?: string;
     specifications?: {
@@ -18,6 +27,11 @@ export interface Product {
         warranty: string;
         origin: string;
     };
+    languages?: {
+        lang_code: string;
+        post_id: number;
+    }[];
+    lang_code: string;
 }
 
 export interface ProductListResponse {

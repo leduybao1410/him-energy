@@ -33,6 +33,11 @@ export const productSchema = z.object({
     thumbnail_url: z.string()
         .optional(),
 
+    pdf_file: z.object({
+        url: z.string().optional(),
+        title: z.string().optional(),
+    }).optional(),
+
     specifications: z.object({
         capacity: z.string().optional(),
         efficiency: z.string().optional(),
@@ -51,8 +56,12 @@ export const productFormSchema = z.object({
     price: z.string().min(1, 'Giá sản phẩm là bắt buộc'),
     category: z.string().min(1, 'Danh mục là bắt buộc'),
     features: z.string().optional(),
-    image_url: z.string().optional(),
+    image_url: z.array(z.string()).optional(),
     thumbnail_url: z.string().optional(),
+    pdf_file: z.object({
+        url: z.string().optional(),
+        title: z.string().optional(),
+    }).optional(),
     specifications: z.object({
         capacity: z.string().optional(),
         efficiency: z.string().optional(),
@@ -61,6 +70,8 @@ export const productFormSchema = z.object({
         warranty: z.string().optional(),
         origin: z.string().optional(),
     }).optional(),
+    lang_code: z.string().optional(),
+    root_id: z.number().optional(),
 });
 
 export type ProductFormData = z.infer<typeof productFormSchema>;

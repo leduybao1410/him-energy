@@ -9,6 +9,8 @@ type Params = Promise<{ id: string }>;
 export async function GET(request: Request, { params }: { params: Params }) {
     try {
         const { id } = await params;
+        const { searchParams } = new URL(request.url);
+        const lang_code = searchParams.get('lang_code') || 'VI'; // Default to Vietnamese
 
         if (!id) {
             return NextResponse.json(
@@ -17,7 +19,7 @@ export async function GET(request: Request, { params }: { params: Params }) {
             );
         }
 
-        const apiUrl = `${serverRouteMap.products.get.url(id)}`;
+        const apiUrl = `${serverRouteMap.products.get.url(id)}?lang_code=${lang_code}`;
         const res = await fetch(apiUrl, {
             method: serverRouteMap.products.get.method,
         });
@@ -126,4 +128,5 @@ export async function DELETE(request: Request, { params }: { params: Params }) {
         );
     }
 }
+
 

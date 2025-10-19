@@ -1,6 +1,16 @@
 @import "tailwindcss";
 
 @theme {
+  --animate-fade-in: fade-in 0.5s ease-out forwards;
+  --animate-fade-out: fade-out 0.5s ease-out forwards;
+  --animate-slide-in-left: slide-in-left 0.5s ease-out forwards;
+  --animate-slide-in-right: slide-in-right 0.5s ease-out forwards;
+  --animate-slide-in-up: slide-in-up 0.5s ease-out forwards;
+  --animate-slide-in-down: slide-in-down 0.5s ease-out forwards;
+  --animate-slide-out-left: slide-out-left 0.5s ease-out forwards;
+  --animate-slide-out-right: slide-out-right 0.5s ease-out forwards;
+  --animate-slide-out-up: slide-out-up 0.5s ease-out forwards;
+  --animate-slide-out-down: slide-out-down 0.5s ease-out forwards;
   --color-primary-100: #fff7ed;
   --color-primary-200: #ffedd5;
   --color-primary-300: #fed7aa;
@@ -331,6 +341,123 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(45deg, var(--color-primary-600), var(--color-primary-300));
+}
+
+/* Animation keyframes */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-in-left {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-out-left {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes slide-out-right {
+  0% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}
+
+@keyframes slide-out-up {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes slide-out-down {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(100%);
+  }
 }
 
 /* Glowing effects */

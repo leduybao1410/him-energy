@@ -45,7 +45,8 @@
         "gallery": "Галерея",
         "reviews": "Отзывы",
         "warranty": "Гарантия",
-        "delivery": "Доставка"
+        "delivery": "Доставка",
+        "downloadPdf": "Скачать PDF"
     },
     "categories": {
         "solar": {

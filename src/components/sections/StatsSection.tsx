@@ -1,4 +1,4 @@
-import { Section, Container } from '@/components/ui';
+import { Section, Container, AnimationText } from '@/components/ui';
 
 const StatsSection = () => {
     const statsData = [
@@ -24,13 +24,13 @@ const StatsSection = () => {
         <Section background="gradient">
             <Container maxWidth="4xl">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                    <AnimationText animation="slideInDown" timing="slow" delay="medium" trigger="onScroll" className="text-4xl md:text-5xl font-bold text-white mb-6">
                         Tác động <span className="text-primary-200">Đo lường được</span>
-                    </h2>
-                    <p className="text-xl text-primary-100 max-w-3xl mx-auto">
+                    </AnimationText>
+                    <AnimationText animation="slideInDown" timing="slow" delay="medium" trigger="onScroll" className="text-xl text-primary-100 max-w-3xl mx-auto" as="p">
                         Những con số ấn tượng thể hiện cam kết của chúng tôi trong việc
                         xây dựng tương lai bền vững.
-                    </p>
+                    </AnimationText>
                 </div>
 
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
