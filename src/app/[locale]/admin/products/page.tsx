@@ -31,7 +31,7 @@ export default function AdminProductsPage() {
     const t = useTranslations();
     const tCategories = useTranslations('products.categories');
 
-    const currentLangCode = window.location.pathname.split('/')[1] || 'vi';
+    const currentLangCode = typeof window !== 'undefined' ? window.location.pathname.split('/')[1] : 'vi';
 
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);

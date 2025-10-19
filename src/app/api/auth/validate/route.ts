@@ -1,5 +1,5 @@
-import { authRoute } from "@/constants/server-route/server-auth-route";
-import { Method } from "@/constants/utils";
+
+import { serverAuthRoute } from "@/constants/server-route/server-auth-route";
 import { getAccessTokenFromRequest } from "@/lib/api/apiFetch";
 import { CONTENT_TYPE_APPLICATION_JSON } from "@/lib/utils";
 import { NextResponse } from "next/server";
@@ -10,8 +10,8 @@ export async function POST(request: Request) {
         if (!accessToken) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
-        const response = await fetch(authRoute.validateToken.url, {
-            method: authRoute.validateToken.method,
+        const response = await fetch(serverAuthRoute.validateToken.url, {
+            method: serverAuthRoute.validateToken.method,
             headers: {
                 ...CONTENT_TYPE_APPLICATION_JSON
             },
