@@ -34,7 +34,7 @@ const TestimonialsSection = () => {
 
     return (
         <Section background={'light-grey'}
-            backgroundImage="/Vinteg_solar_power_4.jpg"
+            backgroundImage="/vinteg_solar_power_4.jpg"
         >
             <Container maxWidth="6xl">
                 <div className="text-center mb-16">

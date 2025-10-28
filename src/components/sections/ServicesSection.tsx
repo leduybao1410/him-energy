@@ -39,7 +39,7 @@ const ServicesSection = () => {
     ];
 
     return (
-        <Section id="solutions" background="light-grey" backgroundImage="/Vinteg_wind_power_4.jpg">
+        <Section id="solutions" background="light-grey" backgroundImage="/vinteg_wind_power_4.jpg">
             <Container maxWidth="6xl">
                 <div className="text-center mb-16">
                     <AnimationText

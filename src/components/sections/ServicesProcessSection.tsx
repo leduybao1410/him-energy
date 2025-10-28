@@ -54,7 +54,7 @@ const ServicesProcessSection = () => {
     ];
 
     return (
-        <Section id="services-process" background="extra-light" backgroundImage="/Vinteg_wind_power_4.jpg">
+        <Section id="services-process" background="extra-light" backgroundImage="/vinteg_wind_power_4.jpg">
             <Container maxWidth="6xl">
                 <div className="text-center mb-16">
                     <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
