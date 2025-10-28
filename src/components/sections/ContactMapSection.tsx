@@ -16,8 +16,8 @@ const ContactMapSection = () => {
     }, []);
 
     const officeInfo = {
-        address: '123 Đường Năng Lượng Xanh, Quận 1, TP. Hồ Chí Minh',
-        coordinates: '10.7769, 106.7009', // Ho Chi Minh City coordinates
+        address: 'Tòa nhà Galleria Residence, C1.05, Tháp C/20 Nguyễn Thiện Thành, P, Thủ Đức, Thành phố Hồ Chí Minh 70000, Vietnam',
+        mapLink: 'https://www.google.com/maps/place/Him+Café+-+Thủ+Thiêm/@10.7795483,106.7131549,19z/data=!3m1!4b1!4m6!3m5!1s0x31752f1d15d8bceb:0x370f83ac3b725029!8m2!3d10.7795483!4d106.7137986!16s%2Fg%2F11y4yhfh5l?entry=ttu&g_ep=EgoyMDI1MTAyNi4wIKXMDSoASAFQAw%3D%3D',
         phone: '+84 123 456 789',
         email: 'info@himenergy.com',
         hours: {
@@ -76,8 +76,8 @@ const ContactMapSection = () => {
                                 ) : (
                                     <div className="relative h-full">
                                         {/* Embedded Google Map */}
-                                        <iframe
-                                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.325120123456!2d106.6987!3d10.7769!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTDCsDQ2JzM2LjgiTiAxMDbCsDQxJzU1LjIiRQ!5e0!3m2!1svi!2s!4v1234567890123!5m2!1svi!2s"
+
+                                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.414280914275!2d106.71122367584096!3d10.779548289369433!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752f1d15d8bceb%3A0x370f83ac3b725029!2zSGltIENhZsOpIC0gVGjhu6cgVGhpw6pt!5e0!3m2!1sen!2s!4v1761665582088!5m2!1sen!2s"
                                             width="100%"
                                             height="100%"
                                             style={{ border: 0 }}
@@ -86,7 +86,6 @@ const ContactMapSection = () => {
                                             referrerPolicy="no-referrer-when-downgrade"
                                             title="HIM Energy Office Location"
                                         />
-
                                         {/* Map Overlay Info */}
                                         <div className="absolute top-4 left-4 bg-white rounded-lg p-4 shadow-lg max-w-xs">
                                             <div className="flex items-center space-x-2 mb-2">
@@ -97,12 +96,12 @@ const ContactMapSection = () => {
                                             <div className="mt-2 flex space-x-2">
                                                 <a
                                                     href={`tel:${officeInfo.phone}`}
-                                                    className="text-xs bg-primary-100 text-primary-700 px-2 py-1 rounded"
+                                                    className="text-xs hover:underline bg-primary-100 text-gray-700 px-2 py-1 rounded"
                                                 >
                                                     Gọi ngay
                                                 </a>
                                                 <a
-                                                    href={`https://maps.google.com/?q=${officeInfo.coordinates}`}
+                                                    href={officeInfo.mapLink}
                                                     target="_blank"
                                                     rel="noopener noreferrer"
                                                     className="text-xs bg-secondary-100 text-secondary-700 px-2 py-1 rounded"
@@ -160,7 +159,7 @@ const ContactMapSection = () => {
                         </Card>
 
                         {/* Directions */}
-                        <Card className="p-6">
+                        {/* <Card className="p-6">
                             <div className="flex items-center space-x-3 mb-4">
                                 <div className="w-10 h-10 bg-secondary-500 rounded-full flex items-center justify-center">
                                     <Navigation className="w-5 h-5 text-white" />
@@ -182,14 +181,14 @@ const ContactMapSection = () => {
                                     </div>
                                 ))}
                             </div>
-                        </Card>
+                        </Card> */}
 
                         {/* Quick Actions */}
-                        <Card className="p-6 bg-gradient-to-br from-primary-50 to-secondary-50">
+                        {/* <Card className="p-6 bg-gradient-to-br from-primary-50 to-secondary-50">
                             <h3 className="text-lg font-bold text-gray-900 mb-4">Hành động nhanh</h3>
                             <div className="space-y-3">
                                 <a
-                                    href={`https://maps.google.com/?q=${officeInfo.coordinates}`}
+                                    href={officeInfo.mapLink}
                                     target="_blank"
                                     rel="noopener noreferrer"
                                     className="flex items-center space-x-2 w-full p-3 bg-white rounded-lg hover:shadow-md transition-shadow"
@@ -217,12 +216,12 @@ const ContactMapSection = () => {
                                     <span className="text-gray-900">Gửi email</span>
                                 </a>
                             </div>
-                        </Card>
+                        </Card> */}
                     </div>
                 </div>
 
                 {/* Additional Info */}
-                <div className="mt-16 bg-white rounded-2xl p-8 shadow-lg">
+                {/* <div className="mt-16 bg-white rounded-2xl p-8 shadow-lg">
                     <div className="grid md:grid-cols-2 gap-8">
                         <div>
                             <h3 className="text-2xl font-bold text-gray-900 mb-4">
@@ -271,7 +270,7 @@ const ContactMapSection = () => {
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </Container>
         </Section>
     );

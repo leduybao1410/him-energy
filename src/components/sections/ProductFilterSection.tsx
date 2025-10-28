@@ -57,24 +57,22 @@ const ProductFilterSection = ({
     return (
         <Section className=" border-b">
             <Container>
-                <div className="flex flex-row gap-2 items-center">
-                    <div className="flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-between">
-                        <div className="flex items-center gap-4">
-                            <h2 className="text-2xl font-bold text-primary">{t('title')}</h2>
-                            <span className="text-muted-foreground">
-                                {totalProducts} sản phẩm
-                            </span>
-                        </div>
+                <div className="grid grid-cols-12 gap-2 items-center">
+                    <div className="col-span-5 flex flex-col lg:flex-row gap-6 items-start lg:items-center justify-start">
+                        <h2 className="text-xl font-bold text-primary">{t('title')}</h2>
+                        <span className="text-muted-foreground">
+                            {totalProducts} sản phẩm
+                        </span>
                     </div>
 
-                    <div className="items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div className="col-span-6 items-center grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         {/* Search */}
                         <div className="lg:col-span-2">
                             <Input
                                 placeholder={t('search')}
                                 value={searchTerm}
                                 onChange={(e) => handleSearch(e.target.value)}
-                                className="w-full"
+                                className="w-full border p-2 rounded-lg border-gray-300 hover:border-gray-500 focus:border-gray-500 outline-none "
                             />
                         </div>
 
@@ -103,8 +101,7 @@ const ProductFilterSection = ({
                         </Select>
                     </div>
                     <button
-
-                        className="text-sm hover:bg-gray-200 transition-all duration-300 text-black p-2 rounded-full" onClick={clearFilters}>
+                        className="col-span-1 text-sm hover:bg-gray-200 transition-all duration-300 text-black p-2 rounded-full" onClick={clearFilters}>
                         <XIcon className="w-4 h-4" />
                     </button>
                     {/* Price Range */}

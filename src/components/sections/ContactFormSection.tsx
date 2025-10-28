@@ -19,6 +19,7 @@ const ContactFormSection = () => {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value, type } = e.target;
@@ -32,13 +33,52 @@ const ContactFormSection = () => {
         e.preventDefault();
         setIsSubmitting(true);
         setSubmitStatus('idle');
+        setErrorMessage('');
 
         try {
-            // Simulate API call
-            await new Promise(resolve => setTimeout(resolve, 2000));
+            // Simple validation
+            if (!formData.name || !formData.email || !formData.message) {
+                const errorMsg = 'Vui lòng nhập họ tên, email và mô tả chi tiết nhu cầu.';
+                setErrorMessage(errorMsg);
+                setSubmitStatus('error');
+                console.log('Validation Error:', errorMsg);
+                throw new Error(errorMsg);
+            }
 
-            // Here you would typically send the data to your backend
-            console.log('Form submitted:', formData);
+            // Prepare data for API - only send required fields to WordPress
+            const apiData = {
+                name: formData.name,
+                email: formData.email,
+                message: `Dịch vụ quan tâm: ${formData.service || 'Không chọn'}
+Ngân sách: ${formData.budget || 'Không chọn'}
+Thời gian triển khai: ${formData.timeline || 'Không chọn'}
+Công ty: ${formData.company || 'Không có'}
+Số điện thoại: ${formData.phone || 'Không có'}
+Đăng ký newsletter: ${formData.newsletter ? 'Có' : 'Không'}
+
+Nội dung chi tiết:
+${formData.message}`
+            };
+
+            console.log('API Data:', apiData);
+
+            // Call the email API
+            const response = await fetch('/api/email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(apiData)
+            });
+
+            const result = await response.json();
+
+            if (!response.ok) {
+                const errorMsg = result.error || 'Failed to submit form';
+                setErrorMessage(errorMsg);
+                setSubmitStatus('error');
+                throw new Error(errorMsg);
+            }
 
             setSubmitStatus('success');
             setFormData({
@@ -53,7 +93,9 @@ const ContactFormSection = () => {
                 newsletter: false
             });
         } catch (error) {
+            console.error('Form submission error:', error);
             setSubmitStatus('error');
+            setErrorMessage('Có lỗi xảy ra khi gửi form. Vui lòng thử lại sau.');
         } finally {
             setIsSubmitting(false);
         }
@@ -244,7 +286,7 @@ const ContactFormSection = () => {
                                 {submitStatus === 'error' && (
                                     <div className="flex items-center space-x-2 text-red-600 bg-red-50 p-4 rounded-lg">
                                         <AlertCircle className="w-5 h-5" />
-                                        <span>Có lỗi xảy ra. Vui lòng thử lại sau.</span>
+                                        <span>{errorMessage || 'Có lỗi xảy ra. Vui lòng thử lại sau.'}</span>
                                     </div>
                                 )}
                             </form>

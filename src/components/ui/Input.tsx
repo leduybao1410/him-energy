@@ -10,6 +10,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     labelClassName?: string;
     isCurrency?: boolean;
     currencySymbol?: string;
+    icon?: React.ReactNode;
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -23,6 +24,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         currencySymbol = 'đ',
         value,
         onChange,
+        icon,
         ...props
     }, ref) => {
         const [displayValue, setDisplayValue] = useState('');
@@ -48,11 +50,17 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                             {currencySymbol}
                         </div>
                     )}
+                    {icon && (
+                        <div className="absolute left-3 top-1/2 transform -translate-y-1/2">
+                            {icon}
+                        </div>
+                    )}
                     <input
                         ref={ref}
                         className={cn(
-                            'w-full py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all duration-200',
+                            'w-full py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-gray-500 outline-none transition-all duration-200',
                             isCurrency ? 'pl-8 pr-4' : 'px-4',
+                            icon && 'pl-10',
                             error && 'border-red-500 focus:ring-red-500 ',
                             textClassName,
                         )}

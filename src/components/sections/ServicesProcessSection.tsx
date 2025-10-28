@@ -54,13 +54,13 @@ const ServicesProcessSection = () => {
     ];
 
     return (
-        <Section id="services-process" background="gray">
+        <Section id="services-process" background="extra-light" backgroundImage="/Vinteg_wind_power_4.jpg">
             <Container maxWidth="6xl">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                         Quy trình <span className="text-primary-600">Làm việc</span>
                     </h2>
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                    <p className="text-xl text-white/80 max-w-3xl mx-auto">
                         Chúng tôi tuân thủ quy trình làm việc chuyên nghiệp để đảm bảo chất lượng và hiệu quả tối ưu
                     </p>
                 </div>

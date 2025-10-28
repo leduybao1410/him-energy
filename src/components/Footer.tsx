@@ -55,6 +55,7 @@ const Footer = () => {
         { name: 'YouTube', icon: Youtube, href: '#', color: 'hover:text-red-600' },
     ];
 
+
     return (
         <footer className="bg-gradient-to-br  from-gray-900 via-gray-800 to-secondary-700 text-white relative overflow-hidden">
             {/* Background Pattern */}

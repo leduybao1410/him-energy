@@ -5,12 +5,17 @@ import Link from 'next/link';
 import { Menu, X, Sun, Wind, Leaf, ChevronDown } from 'lucide-react';
 import { useLocale, useTranslations } from 'next-intl';
 import LanguageSwitcher from './LanguageSwitcher';
+import { useAuth } from '@/hooks/useAuth';
+import { UserIcon } from 'lucide-react';
+import { Button, DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from './ui';
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
     const [headerStyle, setHeaderStyle] = useState<'auto' | 'fixed' | 'gradient'>('auto');
     const t = useTranslations('common');
+
+    const { isAuthenticated, logout } = useAuth();
 
     useEffect(() => {
         if (typeof window === 'undefined') return;
@@ -104,6 +109,7 @@ const Header = () => {
         return currentPath === `/${currentLocale}${href === '/' ? '' : href}`;
     };
 
+
     return (
         <header
 
@@ -191,6 +197,18 @@ const Header = () => {
                         <button className={`px-6 py-2.5 rounded-full font-semibold transition-all duration-500 ${textClasses.cta}`}>
                             {t('navigation.getQuote')}
                         </button>
+                        {isAuthenticated && (
+                            <DropdownMenu modal={true}>
+                                <DropdownMenuTrigger className="cursor-pointer border border-white/80 bg-gray-600/50 hover:bg-gray-600 text-white rounded-full p-2 transition-all duration-500">
+                                    <UserIcon className="w-6 h-6 text-white" />
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align='end' className='mt-2 border-white/80'>
+                                    <DropdownMenuItem className='cursor-pointer bg-white/80' onClick={logout}>
+                                        {t('navigation.logout')}
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        )}
                     </div>
 
                     {/* Mobile Menu Button */}

@@ -3,7 +3,7 @@ import { Section, Container } from '@/components/ui';
 
 const ServicesHeroSection = () => {
     return (
-        <Section id="services-hero" background="gradient">
+        <Section id="services-hero" background="super-light" backgroundImage="/Vinteg_wind_power_3.jpg">
             <Container maxWidth="6xl">
                 <div className="text-center py-20">
                     <div className="mb-8">

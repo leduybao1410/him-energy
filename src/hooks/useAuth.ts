@@ -24,11 +24,6 @@ export function useAuth() {
                 const hasToken = !!(accessToken || localStorageToken);
                 setIsAuthenticated(hasToken);
 
-                if (!hasToken) {
-                    console.log('🔒 No authentication token found');
-                } else {
-                    console.log('✅ Authentication token found');
-                }
             } catch (error) {
                 console.error('Error checking authentication:', error);
                 setIsAuthenticated(false);
@@ -40,21 +35,30 @@ export function useAuth() {
         checkAuth();
     }, []);
 
-    const logout = () => {
+    const logout = async () => {
         try {
-            // Clear cookie (if possible from client side)
+            // Attempt to clear cookie on client side (best effort)
             document.cookie = 'ACCESS_TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
 
-            // Clear localStorage
+            // Clear localStorage token fallback
             localStorage.removeItem('token');
 
-            // Update state
-            setIsAuthenticated(false);
+            // Call backend logout endpoint to clear httpOnly cookie
+            const response = await fetch('/api/auth/logout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
 
-            // Redirect to home page
-            router.push('/');
-
-            console.log('🚪 User logged out successfully');
+            // The backend returns message but not { success: true }, so handle accordingly
+            if (response.ok) {
+                setIsAuthenticated(false);
+                router.push('/');
+            } else {
+                // Optionally handle error cases here (logout failed)
+                console.error('Logout failed:', await response.json());
+            }
         } catch (error) {
             console.error('Error during logout:', error);
         }

@@ -20,7 +20,7 @@ const Button = ({
     type = 'button',
     disabled = false
 }: ButtonProps) => {
-    const baseClasses = 'z-50 cursor-pointer font-semibold rounded-full transition-all duration-300 transform hover:scale-105 flex items-center gap-2 justify-center';
+    const baseClasses = 'z-50 cursor-pointer font-semibold rounded-full transition-all duration-300 transform  flex items-center gap-2 justify-center';
 
     const variantClasses = {
         primary: 'bg-gradient-to-r from-primary-500 to-secondary-500 hover:from-primary-600 hover:to-secondary-600 text-white shadow-lg shadow-primary-500/25',
@@ -44,7 +44,7 @@ const Button = ({
                 baseClasses,
                 variantClasses[variant],
                 sizeClasses[size],
-                disabled && 'opacity-50 cursor-not-allowed hover:scale-100',
+                disabled && 'opacity-50 cursor-not-allowed ',
                 className
             )}
         >

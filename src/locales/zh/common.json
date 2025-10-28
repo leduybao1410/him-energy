@@ -8,7 +8,8 @@
     "projects": "项目",
     "contact": "联系我们",
     "getQuote": "获取免费报价",
-    "greenEnergy": "绿色能源"
+    "greenEnergy": "绿色能源",
+    "logout": "退出登录"
   },
   "solutions": {
     "solar": "太阳能",

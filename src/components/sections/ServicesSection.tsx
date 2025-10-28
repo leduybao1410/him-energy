@@ -39,7 +39,7 @@ const ServicesSection = () => {
     ];
 
     return (
-        <Section id="solutions" background="white">
+        <Section id="solutions" background="light-grey" backgroundImage="/Vinteg_wind_power_4.jpg">
             <Container maxWidth="6xl">
                 <div className="text-center mb-16">
                     <AnimationText
@@ -47,7 +47,7 @@ const ServicesSection = () => {
                         timing="slow"
                         delay="medium"
                         trigger="onScroll"
-                        className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                        className="text-4xl md:text-5xl font-bold text-white mb-6">
                         Giải pháp <span className="text-primary-600 animate-pulse">Năng lượng</span>
                     </AnimationText>
                     <AnimationText
@@ -55,7 +55,7 @@ const ServicesSection = () => {
                         timing="slow"
                         delay="medium"
                         trigger="onScroll"
-                        className="text-xl text-gray-600 max-w-3xl mx-auto"
+                        className="text-xl text-white/80 max-w-3xl mx-auto"
                         as="p"
                     >
                         Cung cấp đa dạng các giải pháp năng lượng tái tạo phù hợp với mọi nhu cầu
@@ -72,7 +72,7 @@ const ServicesSection = () => {
                             <div className={`h-64 bg-gradient-to-br ${service.gradient} flex items-center justify-center`}>
                                 {service.icon}
                             </div>
-                            <div className="p-6 bg-white">
+                            <div className="p-6 bg-white/90">
                                 <h3 className="text-2xl font-bold text-gray-900 mb-3">{service.title}</h3>
                                 <p className="text-gray-600 mb-4">
                                     {service.description}

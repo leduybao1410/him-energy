@@ -31,6 +31,7 @@ const Card = ({
             className={cn(
                 baseClasses,
                 hoverClasses,
+
                 paddingClasses[padding],
                 className
             )}

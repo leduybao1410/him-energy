@@ -15,7 +15,7 @@ export default function Contact() {
             <ContactInfoSection />
             <ContactFormSection />
             <ContactMapSection />
-            <ContactSection />
+            {/* <ContactSection /> */}
         </div>
     );
 }

@@ -8,7 +8,8 @@
         "projects": "Dự án",
         "contact": "Liên hệ",
         "getQuote": "Báo giá miễn phí",
-        "greenEnergy": "Năng lượng xanh"
+        "greenEnergy": "Năng lượng xanh",
+        "logout": "Đăng xuất"
     },
     "solutions": {
         "solar": "Năng lượng Mặt trời",

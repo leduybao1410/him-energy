@@ -33,13 +33,15 @@ const TestimonialsSection = () => {
     };
 
     return (
-        <Section background="gray">
+        <Section background={'light-grey'}
+            backgroundImage="/Vinteg_solar_power_4.jpg"
+        >
             <Container maxWidth="6xl">
                 <div className="text-center mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+                    <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
                         Khách hàng <span className="text-primary-600">Nói gì</span>
                     </h2>
-                    <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                    <p className="text-xl text-white/80 max-w-3xl mx-auto">
                         Phản hồi từ những khách hàng đã tin tưởng và lựa chọn Him Energy
                         cho giải pháp năng lượng của họ.
                     </p>
@@ -47,7 +49,7 @@ const TestimonialsSection = () => {
 
                 <div className="grid md:grid-cols-3 gap-8">
                     {testimonialsData.map((testimonial, index) => (
-                        <Card key={index} hover>
+                        <Card key={index} hover className='bg-white/90'>
                             <div className="flex items-center mb-4">
                                 {renderStars()}
                             </div>

@@ -98,7 +98,7 @@ export default function LoginPage() {
                         console.warn('⚠️ Cookies are disabled in browser');
                     }
 
-                    router.push('/admin/products');
+                    window.location.href = '/admin/products';
                 } else {
                     throw new Error('Login failed');
                 }
@@ -137,7 +137,7 @@ export default function LoginPage() {
                             )}
 
                             <form onSubmit={handleSubmit} className="space-y-6">
-                                <div>
+                                <div className="relative">
                                     <Input
                                         type="text"
                                         name="username"
@@ -146,9 +146,9 @@ export default function LoginPage() {
                                         value={formData.username}
                                         onChange={handleInputChange}
                                         error={errors.email}
-                                        className="pl-10"
+                                        icon={<Mail className="w-5 h-5 text-gray-400" />}
                                     />
-                                    <Mail className="absolute left-3 top-9 w-5 h-5 text-gray-400" />
+
                                 </div>
 
                                 <div className="relative">
@@ -160,16 +160,8 @@ export default function LoginPage() {
                                         value={formData.password}
                                         onChange={handleInputChange}
                                         error={errors.password}
-                                        className="pl-10 pr-10"
+                                        icon={<Lock className="w-5 h-5 text-gray-400" />}
                                     />
-                                    <Lock className="absolute left-3 top-9 w-5 h-5 text-gray-400" />
-                                    <button
-                                        type="button"
-                                        onClick={() => setShowPassword(!showPassword)}
-                                        className="absolute right-3 top-9 text-gray-400 hover:text-gray-600"
-                                    >
-                                        {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-                                    </button>
                                 </div>
 
                                 <div className="flex items-center justify-between">
